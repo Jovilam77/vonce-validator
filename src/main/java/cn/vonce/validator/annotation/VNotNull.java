@@ -1,25 +1,25 @@
-package cn.vonce.valid.annotation;
+package cn.vonce.validator.annotation;
 
-import cn.vonce.valid.rule.ValidFieldDefault;
+import cn.vonce.validator.rule.ValidFieldDefault;
 
 import java.lang.annotation.*;
 
 /**
- * 验证密码格式
+ * 验证字段不能为null
  * 
  * @author jovi
  * @email 766255988@qq.com
  * @version 1.0
- * @date 2017年4月23日下午3:28:47
+ * @date 2017年4月20日下午6:45:26
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD, ElementType.PARAMETER })
 @Documented
 @Inherited
-public @interface VPassword {
-
+public @interface VNotNull {
+	
 	/**
-	 * 标识该名称 用于拼接消息提示
+	 * 标识该字段名称 用于拼接消息提示
 	 * 
 	 * @author jovi
 	 * @date 2017年4月21日上午11:56:34
@@ -31,10 +31,10 @@ public @interface VPassword {
 	 * 消息提示
 	 * 
 	 * @author jovi
-	 * @date 2017年4月21日上午10:49:47
+	 * @date 2017年4月21日上午10:50:02
 	 * @return
 	 */
-	String value() default "密码格式不正确";
+	String value() default "字段不能为null";
 	
 	/**
 	 * 该字段在某分组进行验证
@@ -61,5 +61,6 @@ public @interface VPassword {
 	 * @date 2017年4月21日下午7:02:13
 	 * @return
 	 */
-	String method() default "validPassword";
+	String method() default "validNotNull";
+
 }

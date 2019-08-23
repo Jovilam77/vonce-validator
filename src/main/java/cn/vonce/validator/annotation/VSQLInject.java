@@ -1,28 +1,28 @@
-package cn.vonce.valid.annotation;
+package cn.vonce.validator.annotation;
 
-import cn.vonce.valid.rule.ValidFieldDefault;
+import cn.vonce.validator.rule.ValidFieldDefault;
 
 import java.lang.annotation.*;
 
 /**
- * 验证邮箱格式
+ * 验证字段是否存在sql注入
  * 
- * @author jovi
+ * @author Jovi
  * @email 766255988@qq.com
  * @version 1.0
- * @date 2017年4月23日下午3:28:47
+ * @date 2018年2月28日下午8:13:26
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD, ElementType.PARAMETER })
 @Documented
 @Inherited
-public @interface VEmail {
+public @interface VSQLInject {
 
 	/**
 	 * 标识该名称 用于拼接消息提示
 	 * 
-	 * @author jovi
-	 * @date 2017年4月21日上午11:56:34
+	 * @author Jovi
+	 * @date 2018年2月28日下午8:12:48
 	 * @return
 	 */
 	String name() default "";
@@ -30,17 +30,17 @@ public @interface VEmail {
 	/**
 	 * 消息提示
 	 * 
-	 * @author jovi
-	 * @date 2017年4月21日上午10:49:47
+	 * @author Jovi
+	 * @date 2018年2月28日下午8:12:40
 	 * @return
 	 */
-	String value() default "验证邮箱格式不正确";
+	String value() default "非法字段";
 
 	/**
 	 * 该字段在某分组进行验证
 	 * 
 	 * @author Jovi
-	 * @date 2017年6月21日下午12:07:25
+	 * @date 2018年2月28日下午8:12:33
 	 * @return
 	 */
 	String[] group() default "";
@@ -48,8 +48,8 @@ public @interface VEmail {
 	/**
 	 * 拓展类
 	 * 
-	 * @author jovi
-	 * @date 2017年4月21日下午7:02:03
+	 * @author Jovi
+	 * @date 2018年2月28日下午8:12:27
 	 * @return
 	 */
 	Class<?> type() default ValidFieldDefault.class;
@@ -57,9 +57,10 @@ public @interface VEmail {
 	/**
 	 * 拓展方法
 	 * 
-	 * @author jovi
-	 * @date 2017年4月21日下午7:02:13
+	 * @author Jovi
+	 * @date 2018年2月28日下午8:12:20
 	 * @return
 	 */
-	String method() default "validPhoneNum";
+	String method() default "validSQLInject";
+
 }

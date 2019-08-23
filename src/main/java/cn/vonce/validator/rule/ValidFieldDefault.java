@@ -1,11 +1,11 @@
-package cn.vonce.valid.rule;
+package cn.vonce.validator.rule;
 
 import cn.vonce.common.uitls.CheckChineseUtil;
 import cn.vonce.common.uitls.IdCardUtil;
 import cn.vonce.common.uitls.IdCardUtil.Result;
 import cn.vonce.common.uitls.ValidatorUtil;
-import cn.vonce.valid.annotation.*;
-import cn.vonce.valid.helper.ValidFieldHelper;
+import cn.vonce.validator.annotation.*;
+import cn.vonce.validator.helper.ValidFieldHelper;
 
 import java.lang.reflect.Field;
 import java.text.ParseException;

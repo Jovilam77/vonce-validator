@@ -1,25 +1,25 @@
-package cn.vonce.valid.annotation;
+package cn.vonce.validator.annotation;
 
-import cn.vonce.valid.rule.ValidFieldDefault;
+import cn.vonce.validator.rule.ValidFieldDefault;
 
 import java.lang.annotation.*;
 
 /**
- * 验证字段最小值
+ * 验证URl格式
  * 
  * @author jovi
  * @email 766255988@qq.com
  * @version 1.0
- * @date 2017年4月21日上午10:47:13
+ * @date 2017年4月23日下午3:28:47
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD, ElementType.PARAMETER })
 @Documented
 @Inherited
-public @interface VMaxValue {
+public @interface VUrl {
 
 	/**
-	 * 标识该字段名称 用于拼接消息提示
+	 * 标识该名称 用于拼接消息提示
 	 * 
 	 * @author jovi
 	 * @date 2017年4月21日上午11:56:34
@@ -28,22 +28,22 @@ public @interface VMaxValue {
 	String name() default "";
 
 	/**
-	 * 字段最大值
+	 * 验证URl格式是否正确
 	 * 
 	 * @author jovi
-	 * @date 2017年4月21日上午10:48:19
+	 * @date 2017年4月21日上午10:49:41
 	 * @return
 	 */
-	double val();
+	boolean value() default true;
 
 	/**
 	 * 消息提示
 	 * 
 	 * @author jovi
-	 * @date 2017年4月21日上午10:48:29
+	 * @date 2017年4月21日上午10:49:47
 	 * @return
 	 */
-	String value() default "字段值大于最大值%s";
+	String message() default "URl格式不正确";
 	
 	/**
 	 * 该字段在某分组进行验证
@@ -70,6 +70,5 @@ public @interface VMaxValue {
 	 * @date 2017年4月21日下午7:02:13
 	 * @return
 	 */
-	String method() default "validMaxValue";
-
+	String method() default "validUrl";
 }

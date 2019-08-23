@@ -1,11 +1,11 @@
-package cn.vonce.valid.annotation;
+package cn.vonce.validator.annotation;
 
-import cn.vonce.valid.rule.ValidFieldDefault;
+import cn.vonce.validator.rule.ValidFieldDefault;
 
 import java.lang.annotation.*;
 
 /**
- * 验证URl格式
+ * 验证密码格式
  * 
  * @author jovi
  * @email 766255988@qq.com
@@ -16,7 +16,7 @@ import java.lang.annotation.*;
 @Target({ ElementType.FIELD, ElementType.PARAMETER })
 @Documented
 @Inherited
-public @interface VUrl {
+public @interface VPassword {
 
 	/**
 	 * 标识该名称 用于拼接消息提示
@@ -28,22 +28,13 @@ public @interface VUrl {
 	String name() default "";
 
 	/**
-	 * 验证URl格式是否正确
-	 * 
-	 * @author jovi
-	 * @date 2017年4月21日上午10:49:41
-	 * @return
-	 */
-	boolean value() default true;
-
-	/**
 	 * 消息提示
 	 * 
 	 * @author jovi
 	 * @date 2017年4月21日上午10:49:47
 	 * @return
 	 */
-	String message() default "URl格式不正确";
+	String value() default "密码格式不正确";
 	
 	/**
 	 * 该字段在某分组进行验证
@@ -70,5 +61,5 @@ public @interface VUrl {
 	 * @date 2017年4月21日下午7:02:13
 	 * @return
 	 */
-	String method() default "validUrl";
+	String method() default "validPassword";
 }

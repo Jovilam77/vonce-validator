@@ -1,23 +1,23 @@
-package cn.vonce.valid.annotation;
+package cn.vonce.validator.annotation;
 
-import cn.vonce.valid.rule.ValidFieldDefault;
+import cn.vonce.validator.rule.ValidFieldDefault;
 
 import java.lang.annotation.*;
 
 /**
- * 验证字段长度范围
+ * 验证字段最小值
  * 
  * @author jovi
  * @email 766255988@qq.com
  * @version 1.0
- * @date 2017年4月20日下午9:59:26
+ * @date 2017年4月21日上午10:47:13
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD, ElementType.PARAMETER })
 @Documented
 @Inherited
-public @interface VRangeLength {
-	
+public @interface VMaxValue {
+
 	/**
 	 * 标识该字段名称 用于拼接消息提示
 	 * 
@@ -28,31 +28,22 @@ public @interface VRangeLength {
 	String name() default "";
 
 	/**
-	 * 验证字段最大长度值
+	 * 字段最大值
 	 * 
 	 * @author jovi
-	 * @date 2017年4月21日上午10:50:11
+	 * @date 2017年4月21日上午10:48:19
 	 * @return
 	 */
-	int max();
-
-	/**
-	 * 验证字段最小长度值
-	 * 
-	 * @author jovi
-	 * @date 2017年4月21日上午10:50:16
-	 * @return
-	 */
-	int min();
+	double val();
 
 	/**
 	 * 消息提示
 	 * 
 	 * @author jovi
-	 * @date 2017年4月21日上午10:50:21
+	 * @date 2017年4月21日上午10:48:29
 	 * @return
 	 */
-	String value() default "字段长度最大为%s,最小为%s";
+	String value() default "字段值大于最大值%s";
 	
 	/**
 	 * 该字段在某分组进行验证
@@ -79,6 +70,6 @@ public @interface VRangeLength {
 	 * @date 2017年4月21日下午7:02:13
 	 * @return
 	 */
-	String method() default "validRangeLength";
+	String method() default "validMaxValue";
 
 }

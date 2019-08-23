@@ -1,11 +1,11 @@
-package cn.vonce.valid.annotation;
+package cn.vonce.validator.annotation;
 
-import cn.vonce.valid.rule.ValidFieldDefault;
+import cn.vonce.validator.rule.ValidFieldDefault;
 
 import java.lang.annotation.*;
 
 /**
- * 验证身份证号码格式
+ * 验证邮箱格式
  * 
  * @author jovi
  * @email 766255988@qq.com
@@ -16,7 +16,7 @@ import java.lang.annotation.*;
 @Target({ ElementType.FIELD, ElementType.PARAMETER })
 @Documented
 @Inherited
-public @interface VIDCard {
+public @interface VEmail {
 
 	/**
 	 * 标识该名称 用于拼接消息提示
@@ -34,8 +34,8 @@ public @interface VIDCard {
 	 * @date 2017年4月21日上午10:49:47
 	 * @return
 	 */
-	String value() default "身份证号码格式不正确";
-	
+	String value() default "验证邮箱格式不正确";
+
 	/**
 	 * 该字段在某分组进行验证
 	 * 
@@ -61,5 +61,5 @@ public @interface VIDCard {
 	 * @date 2017年4月21日下午7:02:13
 	 * @return
 	 */
-	String method() default "validIDCard";
+	String method() default "validPhoneNum";
 }

@@ -1,23 +1,23 @@
-package cn.vonce.valid.annotation;
+package cn.vonce.validator.annotation;
 
-import cn.vonce.valid.rule.ValidFieldDefault;
+import cn.vonce.validator.rule.ValidFieldDefault;
 
 import java.lang.annotation.*;
 
 /**
- * 验证字段最大长度
+ * 验证字段最大值
  * 
  * @author jovi
  * @email 766255988@qq.com
  * @version 1.0
- * @date 2017年4月20日下午6:44:17
+ * @date 2017年4月21日上午10:47:13
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD, ElementType.PARAMETER })
 @Documented
 @Inherited
-public @interface VMaxLength {
-	
+public @interface VMinValue {
+
 	/**
 	 * 标识该字段名称 用于拼接消息提示
 	 * 
@@ -28,23 +28,23 @@ public @interface VMaxLength {
 	String name() default "";
 
 	/**
-	 * 验证字段最大长度值
+	 * 字段最大值
 	 * 
 	 * @author jovi
-	 * @date 2017年4月21日上午10:49:09
+	 * @date 2017年4月21日上午10:48:19
 	 * @return
 	 */
-	int val();
+	double val();
 
 	/**
 	 * 消息提示
 	 * 
 	 * @author jovi
-	 * @date 2017年4月21日上午10:49:15
+	 * @date 2017年4月21日上午10:48:29
 	 * @return
 	 */
-	String value() default "字段长度大于最大值%s";
-	
+	String value() default "字段值小于最小值%s";
+
 	/**
 	 * 该字段在某分组进行验证
 	 * 
@@ -70,6 +70,6 @@ public @interface VMaxLength {
 	 * @date 2017年4月21日下午7:02:13
 	 * @return
 	 */
-	String method() default "validMaxLength";
+	String method() default "validMinValue";
 
 }

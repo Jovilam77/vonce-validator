@@ -1,4 +1,4 @@
-package cn.vonce.valid.annotation;
+package cn.vonce.validator.annotation;
 
 import java.lang.annotation.*;
 

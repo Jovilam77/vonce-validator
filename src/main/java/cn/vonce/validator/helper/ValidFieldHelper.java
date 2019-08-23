@@ -1,6 +1,6 @@
-package cn.vonce.valid.helper;
+package cn.vonce.validator.helper;
 
-import cn.vonce.valid.annotation.VBean;
+import cn.vonce.validator.annotation.VBean;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;

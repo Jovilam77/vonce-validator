@@ -1,28 +1,28 @@
-package cn.vonce.valid.annotation;
+package cn.vonce.validator.annotation;
 
-import cn.vonce.valid.rule.ValidFieldDefault;
+import cn.vonce.validator.rule.ValidFieldDefault;
 
 import java.lang.annotation.*;
 
 /**
- * 验证字段是否存在sql注入
+ * 验证身份证号码格式
  * 
- * @author Jovi
+ * @author jovi
  * @email 766255988@qq.com
  * @version 1.0
- * @date 2018年2月28日下午8:13:26
+ * @date 2017年4月23日下午3:28:47
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD, ElementType.PARAMETER })
 @Documented
 @Inherited
-public @interface VSQLInject {
+public @interface VIDCard {
 
 	/**
 	 * 标识该名称 用于拼接消息提示
 	 * 
-	 * @author Jovi
-	 * @date 2018年2月28日下午8:12:48
+	 * @author jovi
+	 * @date 2017年4月21日上午11:56:34
 	 * @return
 	 */
 	String name() default "";
@@ -30,17 +30,17 @@ public @interface VSQLInject {
 	/**
 	 * 消息提示
 	 * 
-	 * @author Jovi
-	 * @date 2018年2月28日下午8:12:40
+	 * @author jovi
+	 * @date 2017年4月21日上午10:49:47
 	 * @return
 	 */
-	String value() default "非法字段";
-
+	String value() default "身份证号码格式不正确";
+	
 	/**
 	 * 该字段在某分组进行验证
 	 * 
 	 * @author Jovi
-	 * @date 2018年2月28日下午8:12:33
+	 * @date 2017年6月21日下午12:07:25
 	 * @return
 	 */
 	String[] group() default "";
@@ -48,8 +48,8 @@ public @interface VSQLInject {
 	/**
 	 * 拓展类
 	 * 
-	 * @author Jovi
-	 * @date 2018年2月28日下午8:12:27
+	 * @author jovi
+	 * @date 2017年4月21日下午7:02:03
 	 * @return
 	 */
 	Class<?> type() default ValidFieldDefault.class;
@@ -57,10 +57,9 @@ public @interface VSQLInject {
 	/**
 	 * 拓展方法
 	 * 
-	 * @author Jovi
-	 * @date 2018年2月28日下午8:12:20
+	 * @author jovi
+	 * @date 2017年4月21日下午7:02:13
 	 * @return
 	 */
-	String method() default "validSQLInject";
-
+	String method() default "validIDCard";
 }
