@@ -1,9 +1,9 @@
 package cn.vonce.validator.rule;
 
-import cn.vonce.common.uitls.CheckChineseUtil;
-import cn.vonce.common.uitls.IdCardUtil;
-import cn.vonce.common.uitls.IdCardUtil.Result;
-import cn.vonce.common.uitls.ValidatorUtil;
+import cn.vonce.common.utils.CheckChineseUtil;
+import cn.vonce.common.utils.IdCardUtil;
+import cn.vonce.common.utils.IdCardUtil.Result;
+import cn.vonce.common.utils.ValidatorUtil;
 import cn.vonce.validator.annotation.*;
 import cn.vonce.validator.helper.ValidFieldHelper;
 

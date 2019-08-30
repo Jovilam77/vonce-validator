@@ -115,13 +115,13 @@
 
     <artifactId>vonce-validator</artifactId>
     <groupId>cn.vonce</groupId>
-    <version>0.8.0</version>
+    <version>0.8.1</version>
 
     <!-- 版本信息 -->
     <properties>
         <servlet-api.version>4.0.0</servlet-api.version>
         <spring.version>4.2.2.RELEASE</spring.version>
-        <vonce.common.version>1.0.0</vonce.common.version>
+        <vonce.common.version>1.0.1</vonce.common.version>
     </properties>
 
     <dependencies>

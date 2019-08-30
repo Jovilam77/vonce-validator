@@ -1,7 +1,7 @@
 package cn.vonce.validator.intercept;
 
 import cn.vonce.common.base.BaseController;
-import cn.vonce.common.uitls.RequestDataUtil;
+import cn.vonce.common.utils.RequestDataUtil;
 import cn.vonce.validator.annotation.VBean;
 import cn.vonce.validator.helper.ValidFieldHelper;
 import org.aopalliance.intercept.MethodInterceptor;
