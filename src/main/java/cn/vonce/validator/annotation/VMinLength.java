@@ -38,6 +38,12 @@ public @interface VMinLength {
 	int val();
 
 	/**
+	 * 是否不为空时才验证
+	 * @return
+	 */
+	boolean notEmpty() default false;
+
+	/**
 	 * 消息提示
 	 * 
 	 * @author jovi

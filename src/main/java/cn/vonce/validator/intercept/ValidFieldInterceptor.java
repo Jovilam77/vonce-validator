@@ -79,9 +79,17 @@ public class ValidFieldInterceptor implements MethodInterceptor {
             logger.warn("响应内容：" + messageList.toString());
             // 如果该注解存在
             if (!arg0.getMethod().getReturnType().getName().equals("void") && (responseBody != null || restController != null)) {
-                return baseController.parameterHint("参数错误", messageList);
+                if (messageList != null && messageList.size() == 1) {
+                    return baseController.parameterHint(messageList.get(0));
+                } else {
+                    return baseController.parameterHint("参数错误", messageList);
+                }
             } else if (baseController.getRequest() != null && baseController.getResponse() != null) {
-                baseController.parameterHintJSONP("参数错误", messageList);
+                if (messageList != null && messageList.size() == 1) {
+                    baseController.parameterHintJSONP(messageList.get(0));
+                } else {
+                    baseController.parameterHintJSONP("参数错误", messageList);
+                }
             } else {
                 logger.error("参数错误：" + messageList);
             }

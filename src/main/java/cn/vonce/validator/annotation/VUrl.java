@@ -28,6 +28,12 @@ public @interface VUrl {
 	String name() default "";
 
 	/**
+	 * 是否不为空时才验证
+	 * @return
+	 */
+	boolean notEmpty() default false;
+
+	/**
 	 * 验证URl格式是否正确
 	 * 
 	 * @author jovi
