@@ -1,11 +1,11 @@
 package cn.vonce.validator.annotation;
 
-import cn.vonce.validator.rule.ValidFieldDefault;
+import cn.vonce.validator.rule.impl.ValidatePassword;
 
 import java.lang.annotation.*;
 
 /**
- * 验证密码格式
+ * 校验密码格式
  * 
  * @author jovi
  * @email 766255988@qq.com
@@ -15,7 +15,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD, ElementType.PARAMETER })
 @Documented
-@Inherited
+@Validate(type = ValidatePassword.class)
 public @interface VPassword {
 
 	/**
@@ -28,10 +28,10 @@ public @interface VPassword {
 	String name() default "";
 
 	/**
-	 * 是否不为空时才验证
+	 * 是否只有不为空的时候才校验
 	 * @return
 	 */
-	boolean notEmpty() default false;
+	boolean onlyWhenNotEmpty() default false;
 
 	/**
 	 * 消息提示
@@ -43,7 +43,7 @@ public @interface VPassword {
 	String value() default "密码格式不正确";
 	
 	/**
-	 * 该字段在某分组进行验证
+	 * 该字段在某分组进行校验
 	 * 
 	 * @author Jovi
 	 * @date 2017年6月21日下午12:07:25
@@ -51,21 +51,4 @@ public @interface VPassword {
 	 */
 	String[] group() default "";
 
-	/**
-	 * 拓展类
-	 * 
-	 * @author jovi
-	 * @date 2017年4月21日下午7:02:03
-	 * @return
-	 */
-	Class<?> type() default ValidFieldDefault.class;
-
-	/**
-	 * 拓展方法
-	 * 
-	 * @author jovi
-	 * @date 2017年4月21日下午7:02:13
-	 * @return
-	 */
-	String method() default "validPassword";
 }

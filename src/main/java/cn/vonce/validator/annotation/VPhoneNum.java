@@ -1,11 +1,11 @@
 package cn.vonce.validator.annotation;
 
-import cn.vonce.validator.rule.ValidFieldDefault;
+import cn.vonce.validator.rule.impl.ValidateCellphone;
 
 import java.lang.annotation.*;
 
 /**
- * 验证手机或电话格式
+ * 校验手机或电话格式
  * 
  * @author jovi
  * @email 766255988@qq.com
@@ -15,7 +15,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD, ElementType.PARAMETER })
 @Documented
-@Inherited
+@Validate(type = ValidateCellphone.class)
 public @interface VPhoneNum {
 
 	public enum VPhoneType {
@@ -36,7 +36,7 @@ public @interface VPhoneNum {
 	}
 
 	/**
-	 * 验证号码类型，默认为手机号码
+	 * 校验号码类型，默认为手机号码
 	 * 
 	 * @author Jovi
 	 * @date 2017年11月3日下午5:51:52
@@ -45,10 +45,10 @@ public @interface VPhoneNum {
 	VPhoneType phoneType() default VPhoneType.MOBILEPHONE;
 
 	/**
-	 * 是否不为空时才验证
+	 * 是否只有不为空的时候才校验
 	 * @return
 	 */
-	boolean notEmpty() default false;
+	boolean onlyWhenNotEmpty() default false;
 
 	/**
 	 * 消息提示
@@ -60,7 +60,7 @@ public @interface VPhoneNum {
 	String value() default "号码不正确";
 
 	/**
-	 * 该字段在某分组进行验证
+	 * 该字段在某分组进行校验
 	 * 
 	 * @author Jovi
 	 * @date 2017年6月21日下午12:07:25
@@ -68,21 +68,4 @@ public @interface VPhoneNum {
 	 */
 	String[] group() default "";
 
-	/**
-	 * 拓展类
-	 * 
-	 * @author jovi
-	 * @date 2017年4月21日下午7:02:03
-	 * @return
-	 */
-	Class<?> type() default ValidFieldDefault.class;
-
-	/**
-	 * 拓展方法
-	 * 
-	 * @author jovi
-	 * @date 2017年4月21日下午7:02:13
-	 * @return
-	 */
-	String method() default "validPhoneNum";
 }

@@ -1,11 +1,11 @@
 package cn.vonce.validator.annotation;
 
-import cn.vonce.validator.rule.ValidFieldDefault;
+import cn.vonce.validator.rule.impl.ValidateRangeValue;
 
 import java.lang.annotation.*;
 
 /**
- * 验证字段值范围
+ * 校验字段值范围
  * 
  * @author jovi
  * @email 766255988@qq.com
@@ -15,7 +15,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD, ElementType.PARAMETER })
 @Documented
-@Inherited
+@Validate(type = ValidateRangeValue.class)
 public @interface VRangeValue {
 
 	/**
@@ -28,7 +28,7 @@ public @interface VRangeValue {
 	String name() default "";
 
 	/**
-	 * 验证字段最大值
+	 * 校验字段最大值
 	 * 
 	 * @author jovi
 	 * @date 2017年4月21日上午10:52:07
@@ -37,7 +37,7 @@ public @interface VRangeValue {
 	double max();
 
 	/**
-	 * 验证字段最小值
+	 * 校验字段最小值
 	 * 
 	 * @author jovi
 	 * @date 2017年4月21日上午10:52:14
@@ -55,30 +55,12 @@ public @interface VRangeValue {
 	String value() default "字段值最大为%s,最小为%s";
 	
 	/**
-	 * 该字段在某分组进行验证
+	 * 该字段在某分组进行校验
 	 * 
 	 * @author Jovi
 	 * @date 2017年6月21日下午12:07:25
 	 * @return
 	 */
 	String[] group() default "";
-
-	/**
-	 * 拓展类
-	 * 
-	 * @author jovi
-	 * @date 2017年4月21日下午7:02:03
-	 * @return
-	 */
-	Class<?> type() default ValidFieldDefault.class;
-
-	/**
-	 * 拓展方法
-	 * 
-	 * @author jovi
-	 * @date 2017年4月21日下午7:02:13
-	 * @return
-	 */
-	String method() default "validRangeValue";
 
 }

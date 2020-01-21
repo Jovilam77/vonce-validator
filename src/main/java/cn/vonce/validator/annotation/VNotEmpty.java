@@ -1,11 +1,11 @@
 package cn.vonce.validator.annotation;
 
-import cn.vonce.validator.rule.ValidFieldDefault;
+import cn.vonce.validator.rule.impl.ValidateNotEmpty;
 
 import java.lang.annotation.*;
 
 /**
- * 验证字段不能为empty(null和空字符串)
+ * 校验字段不能为empty(null和空字符串)
  * 
  * @author jovi
  * @email 766255988@qq.com
@@ -15,7 +15,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD, ElementType.PARAMETER })
 @Documented
-@Inherited
+@Validate(type = ValidateNotEmpty.class)
 public @interface VNotEmpty {
 	
 	/**
@@ -37,7 +37,7 @@ public @interface VNotEmpty {
 	String value() default "字段不能为empty";
 	
 	/**
-	 * 该字段在某分组进行验证
+	 * 该字段在某分组进行校验
 	 * 
 	 * @author Jovi
 	 * @date 2017年6月21日下午12:07:25
@@ -45,21 +45,4 @@ public @interface VNotEmpty {
 	 */
 	String[] group() default "";
 
-	/**
-	 * 拓展类
-	 * 
-	 * @author jovi
-	 * @date 2017年4月21日下午7:02:03
-	 * @return
-	 */
-	Class<?> type() default ValidFieldDefault.class;
-
-	/**
-	 * 拓展方法
-	 * 
-	 * @author jovi
-	 * @date 2017年4月21日下午7:02:13
-	 * @return
-	 */
-	String method() default "validNotEmpty";
 }

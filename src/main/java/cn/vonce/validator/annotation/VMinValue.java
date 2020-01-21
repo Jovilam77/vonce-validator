@@ -1,11 +1,11 @@
 package cn.vonce.validator.annotation;
 
-import cn.vonce.validator.rule.ValidFieldDefault;
+import cn.vonce.validator.rule.impl.ValidateMinValue;
 
 import java.lang.annotation.*;
 
 /**
- * 验证字段最大值
+ * 校验字段最大值
  * 
  * @author jovi
  * @email 766255988@qq.com
@@ -15,7 +15,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD, ElementType.PARAMETER })
 @Documented
-@Inherited
+@Validate(type = ValidateMinValue.class)
 public @interface VMinValue {
 
 	/**
@@ -46,30 +46,12 @@ public @interface VMinValue {
 	String value() default "字段值小于最小值%s";
 
 	/**
-	 * 该字段在某分组进行验证
+	 * 该字段在某分组进行校验
 	 * 
 	 * @author Jovi
 	 * @date 2017年6月21日下午12:07:25
 	 * @return
 	 */
 	String[] group() default "";
-
-	/**
-	 * 拓展类
-	 * 
-	 * @author jovi
-	 * @date 2017年4月21日下午7:02:03
-	 * @return
-	 */
-	Class<?> type() default ValidFieldDefault.class;
-
-	/**
-	 * 拓展方法
-	 * 
-	 * @author jovi
-	 * @date 2017年4月21日下午7:02:13
-	 * @return
-	 */
-	String method() default "validMinValue";
 
 }

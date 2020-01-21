@@ -1,11 +1,11 @@
 package cn.vonce.validator.annotation;
 
-import cn.vonce.validator.rule.ValidFieldDefault;
+import cn.vonce.validator.rule.impl.ValidateMaxLength;
 
 import java.lang.annotation.*;
 
 /**
- * 验证字段最大长度
+ * 校验字段设置的最大长度
  * 
  * @author jovi
  * @email 766255988@qq.com
@@ -15,7 +15,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD, ElementType.PARAMETER })
 @Documented
-@Inherited
+@Validate(type = ValidateMaxLength.class)
 public @interface VMaxLength {
 	
 	/**
@@ -28,7 +28,7 @@ public @interface VMaxLength {
 	String name() default "";
 
 	/**
-	 * 验证字段最大长度值
+	 * 校验字段最大长度值
 	 * 
 	 * @author jovi
 	 * @date 2017年4月21日上午10:49:09
@@ -37,10 +37,10 @@ public @interface VMaxLength {
 	int val();
 
 	/**
-	 * 是否不为空时才验证
+	 * 是否只有不为空的时候才校验
 	 * @return
 	 */
-	boolean notEmpty() default false;
+	boolean onlyWhenNotEmpty() default false;
 
 	/**
 	 * 消息提示
@@ -49,33 +49,15 @@ public @interface VMaxLength {
 	 * @date 2017年4月21日上午10:49:15
 	 * @return
 	 */
-	String value() default "字段长度大于最大值%s";
+	String value() default "";
 	
 	/**
-	 * 该字段在某分组进行验证
+	 * 该字段在某分组进行校验
 	 * 
 	 * @author Jovi
 	 * @date 2017年6月21日下午12:07:25
 	 * @return
 	 */
 	String[] group() default "";
-
-	/**
-	 * 拓展类
-	 * 
-	 * @author jovi
-	 * @date 2017年4月21日下午7:02:03
-	 * @return
-	 */
-	Class<?> type() default ValidFieldDefault.class;
-
-	/**
-	 * 拓展方法
-	 * 
-	 * @author jovi
-	 * @date 2017年4月21日下午7:02:13
-	 * @return
-	 */
-	String method() default "validMaxLength";
 
 }

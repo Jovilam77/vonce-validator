@@ -1,11 +1,11 @@
 package cn.vonce.validator.annotation;
 
-import cn.vonce.validator.rule.ValidFieldDefault;
+import cn.vonce.validator.rule.impl.ValidateRangeLength;
 
 import java.lang.annotation.*;
 
 /**
- * 验证字段长度范围
+ * 校验字段长度范围
  *
  * @author jovi
  * @version 1.0
@@ -15,7 +15,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Documented
-@Inherited
+@Validate(type = ValidateRangeLength.class)
 public @interface VRangeLength {
 
     /**
@@ -28,7 +28,7 @@ public @interface VRangeLength {
     String name() default "";
 
     /**
-     * 验证字段最大长度值
+     * 校验字段最大长度值
      *
      * @return
      * @author jovi
@@ -37,7 +37,7 @@ public @interface VRangeLength {
     int max();
 
     /**
-     * 验证字段最小长度值
+     * 校验字段最小长度值
      *
      * @return
      * @author jovi
@@ -46,11 +46,11 @@ public @interface VRangeLength {
     int min();
 
     /**
-     * 是否不为空时才验证
+     * 是否只有不为空的时候才校验
      *
      * @return
      */
-    boolean notEmpty() default false;
+    boolean onlyWhenNotEmpty() default false;
 
 
     /**
@@ -63,30 +63,12 @@ public @interface VRangeLength {
     String value() default "字段长度最大为%s,最小为%s";
 
     /**
-     * 该字段在某分组进行验证
+     * 该字段在某分组进行校验
      *
      * @return
      * @author Jovi
      * @date 2017年6月21日下午12:07:25
      */
     String[] group() default "";
-
-    /**
-     * 拓展类
-     *
-     * @return
-     * @author jovi
-     * @date 2017年4月21日下午7:02:03
-     */
-    Class<?> type() default ValidFieldDefault.class;
-
-    /**
-     * 拓展方法
-     *
-     * @return
-     * @author jovi
-     * @date 2017年4月21日下午7:02:13
-     */
-    String method() default "validRangeLength";
 
 }

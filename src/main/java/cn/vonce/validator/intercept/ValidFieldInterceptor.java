@@ -4,6 +4,7 @@ import cn.vonce.common.base.BaseController;
 import cn.vonce.common.utils.RequestDataUtil;
 import cn.vonce.validator.annotation.VBean;
 import cn.vonce.validator.helper.ValidFieldHelper;
+import cn.vonce.validator.model.FieldResult;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.slf4j.Logger;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 验证字段拦截器
+ * 校验字段拦截器
  *
  * @author jovi
  * @version 1.0
@@ -40,7 +41,8 @@ public class ValidFieldInterceptor implements MethodInterceptor {
         } else {
             baseController = new BaseController();
         }
-        List<String> messageList = new ArrayList<>();
+        List<FieldResult> fieldResultList = new ArrayList<>();
+
         for (int i = 0; i < arg0.getArguments().length; i++) {
             // 获取实际对象-即为原始对象(可能是Bean，也可能是字段)
             Object object = arg0.getArguments()[i];
@@ -52,50 +54,49 @@ public class ValidFieldInterceptor implements MethodInterceptor {
             if (baseController.getResponse() == null && object instanceof HttpServletResponse) {
                 baseController.setResponse((HttpServletResponse) object);
             }
-            // 优先验证bean
+            // 优先校验bean
             VBean validBean = ValidFieldHelper.getAnnotation(annotations, VBean.class);
             if (validBean != null) {
-                messageList.addAll(ValidFieldHelper.validBean(object, validBean.group(), validBean.interrupt()));
+                fieldResultList.addAll(ValidFieldHelper.validBean(object, validBean.group(), validBean.interrupt()));
                 break;
             }
-
-            // 验证有注解的字段
-            List<String> mList = ValidFieldHelper.valid(annotations, object, null, "", true);
-            if (mList != null && mList.size() > 0) {
-                messageList.addAll(mList);
+            // 校验有注解的字段
+            List<FieldResult> validFieldResultList = ValidFieldHelper.valid(annotations, arg0.getMethod().getName() + "方法的第" + (i + 1) + "个参数", object, null, "", true);
+            if (validFieldResultList != null && validFieldResultList.size() > 0) {
+                fieldResultList.addAll(validFieldResultList);
                 break;
             }
 
         }
-        logger.info("正在验证参数：" + fullName);
+        logger.info("正在校验参数：" + fullName);
         if (baseController.getRequest() != null) {
             logger.info("请求URL参数：" + RequestDataUtil.getParameters(baseController.getRequest().getParameterMap()));
         } else {
             logger.info("请求URL参数：该方法缺少HttpServletRequest参数无法读取请求URL参数 ");
         }
         // 如果参数错误则直接包装返回结果，不继续往下执行
-        if (messageList != null && messageList.size() > 0) {
-            logger.warn("参数验证不通过：" + fullName);
-            logger.warn("响应内容：" + messageList.toString());
+        if (fieldResultList != null && fieldResultList.size() > 0) {
+            logger.warn("参数校验不通过：" + fullName);
+            logger.warn("响应内容：" + fieldResultList.toString());
             // 如果该注解存在
             if (!arg0.getMethod().getReturnType().getName().equals("void") && (responseBody != null || restController != null)) {
-                if (messageList != null && messageList.size() == 1) {
-                    return baseController.parameterHint(messageList.get(0));
+                if (fieldResultList != null && fieldResultList.size() == 1) {
+                    return baseController.parameterHint(fieldResultList.get(0).getTips());
                 } else {
-                    return baseController.parameterHint("参数错误", messageList);
+                    return baseController.parameterHint("参数错误", fieldResultList);
                 }
             } else if (baseController.getRequest() != null && baseController.getResponse() != null) {
-                if (messageList != null && messageList.size() == 1) {
-                    baseController.parameterHintJSONP(messageList.get(0));
+                if (fieldResultList != null && fieldResultList.size() == 1) {
+                    baseController.parameterHintJSONP(fieldResultList.get(0).getTips());
                 } else {
-                    baseController.parameterHintJSONP("参数错误", messageList);
+                    baseController.parameterHintJSONP("参数错误", fieldResultList);
                 }
             } else {
-                logger.error("参数错误：" + messageList);
+                logger.error("参数错误：" + fieldResultList);
             }
             return null;
         }
-        logger.info("参数验证通过：" + fullName);
+        logger.info("参数校验通过：" + fullName);
         // 参数无错误则执行方法并返回返回值
         return arg0.proceed();
     }

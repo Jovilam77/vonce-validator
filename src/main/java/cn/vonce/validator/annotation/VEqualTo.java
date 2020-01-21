@@ -1,11 +1,11 @@
 package cn.vonce.validator.annotation;
 
-import cn.vonce.validator.rule.ValidFieldDefault;
+import cn.vonce.validator.rule.impl.ValidateEqualTo;
 
 import java.lang.annotation.*;
 
 /**
- * 验证该字段值是否与指定的值一致(主要应用场景：确认密码与密码是否一致)
+ * 校验该字段值是否与指定的值一致(主要应用场景：确认密码与密码是否一致)
  * 
  * @author Jovi
  * @email 766255988@qq.com
@@ -15,8 +15,17 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD, ElementType.PARAMETER })
 @Documented
-@Inherited
+@Validate(type = ValidateEqualTo.class)
 public @interface VEqualTo {
+
+	/**
+	 * 标识该名称 用于拼接消息提示
+	 *
+	 * @author jovi
+	 * @date 2018年1月17日上午9:54:50
+	 * @return
+	 */
+	String name() default "";
 
 	/**
 	 * 消息提示
@@ -25,7 +34,7 @@ public @interface VEqualTo {
 	 * @date 2018年1月17日上午9:54:50
 	 * @return
 	 */
-	String value() default "字段值与指定的值不一致";
+	String value() default "";
 
 	/**
 	 * 指定的值
@@ -46,30 +55,12 @@ public @interface VEqualTo {
 	String field() default "";
 
 	/**
-	 * 该字段在某分组进行验证
+	 * 该字段在某分组进行校验
 	 * 
 	 * @author Jovi
 	 * @date 2018年1月17日上午10:24:51
 	 * @return
 	 */
 	String[] group() default "";
-
-	/**
-	 * 拓展类
-	 * 
-	 * @author Jovi
-	 * @date 2018年1月17日上午10:25:16
-	 * @return
-	 */
-	Class<?> type() default ValidFieldDefault.class;
-
-	/**
-	 * 拓展方法
-	 * 
-	 * @author Jovi
-	 * @date 2018年1月17日上午10:25:22
-	 * @return
-	 */
-	String method() default "validEqualTo";
 
 }

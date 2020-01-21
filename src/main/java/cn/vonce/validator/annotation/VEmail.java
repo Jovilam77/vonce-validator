@@ -1,11 +1,11 @@
 package cn.vonce.validator.annotation;
 
-import cn.vonce.validator.rule.ValidFieldDefault;
+import cn.vonce.validator.rule.impl.ValidateEmail;
 
 import java.lang.annotation.*;
 
 /**
- * 验证邮箱格式
+ * 校验邮箱格式
  * 
  * @author jovi
  * @email 766255988@qq.com
@@ -15,7 +15,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD, ElementType.PARAMETER })
 @Documented
-@Inherited
+@Validate(type = ValidateEmail.class)
 public @interface VEmail {
 
 	/**
@@ -28,10 +28,10 @@ public @interface VEmail {
 	String name() default "";
 
 	/**
-	 * 是否不为空时才验证
+	 * 是否只有不为空的时候才校验
 	 * @return
 	 */
-	boolean notEmpty() default false;
+	boolean onlyWhenNotEmpty() default false;
 
 	/**
 	 * 消息提示
@@ -40,10 +40,10 @@ public @interface VEmail {
 	 * @date 2017年4月21日上午10:49:47
 	 * @return
 	 */
-	String value() default "验证邮箱格式不正确";
+	String value() default "";
 
 	/**
-	 * 该字段在某分组进行验证
+	 * 该字段在某分组进行校验
 	 * 
 	 * @author Jovi
 	 * @date 2017年6月21日下午12:07:25
@@ -51,21 +51,4 @@ public @interface VEmail {
 	 */
 	String[] group() default "";
 
-	/**
-	 * 拓展类
-	 * 
-	 * @author jovi
-	 * @date 2017年4月21日下午7:02:03
-	 * @return
-	 */
-	Class<?> type() default ValidFieldDefault.class;
-
-	/**
-	 * 拓展方法
-	 * 
-	 * @author jovi
-	 * @date 2017年4月21日下午7:02:13
-	 * @return
-	 */
-	String method() default "validPhoneNum";
 }
