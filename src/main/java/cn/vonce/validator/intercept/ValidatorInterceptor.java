@@ -3,7 +3,8 @@ package cn.vonce.validator.intercept;
 import cn.vonce.common.base.BaseController;
 import cn.vonce.common.utils.RequestDataUtil;
 import cn.vonce.validator.annotation.VBean;
-import cn.vonce.validator.helper.ValidFieldHelper;
+import cn.vonce.validator.helper.ValidatorHelper;
+import cn.vonce.validator.model.BeanResult;
 import cn.vonce.validator.model.FieldResult;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.annotation.Annotation;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,9 +26,9 @@ import java.util.List;
  * @email 766255988@qq.com
  * @date 2017年4月20日下午23:56:08
  */
-public class ValidFieldInterceptor implements MethodInterceptor {
+public class ValidatorInterceptor implements MethodInterceptor {
 
-    private final Logger logger = LoggerFactory.getLogger(ValidFieldInterceptor.class);
+    private final Logger logger = LoggerFactory.getLogger(ValidatorInterceptor.class);
 
     @Override
     public Object invoke(MethodInvocation arg0) throws Throwable {
@@ -41,8 +41,7 @@ public class ValidFieldInterceptor implements MethodInterceptor {
         } else {
             baseController = new BaseController();
         }
-        List<FieldResult> fieldResultList = new ArrayList<>();
-
+        BeanResult beanResult = null;
         for (int i = 0; i < arg0.getArguments().length; i++) {
             // 获取实际对象-即为原始对象(可能是Bean，也可能是字段)
             Object object = arg0.getArguments()[i];
@@ -55,15 +54,15 @@ public class ValidFieldInterceptor implements MethodInterceptor {
                 baseController.setResponse((HttpServletResponse) object);
             }
             // 优先校验bean
-            VBean validBean = ValidFieldHelper.getAnnotation(annotations, VBean.class);
+            VBean validBean = ValidatorHelper.getAnnotation(annotations, VBean.class);
             if (validBean != null) {
-                fieldResultList.addAll(ValidFieldHelper.validBean(object, validBean.group(), validBean.interrupt()));
+                beanResult = ValidatorHelper.validBean(object, validBean.group(), validBean.interrupt());
                 break;
             }
             // 校验有注解的字段
-            List<FieldResult> validFieldResultList = ValidFieldHelper.valid(annotations, arg0.getMethod().getName() + "方法的第" + (i + 1) + "个参数", object, null, "", true);
-            if (validFieldResultList != null && validFieldResultList.size() > 0) {
-                fieldResultList.addAll(validFieldResultList);
+            List<FieldResult> validFieldResultList = ValidatorHelper.valid(annotations, arg0.getMethod().getName() + "方法参数" + (i + 1), object, null, "", true);
+            if (!validFieldResultList.isEmpty()) {
+                beanResult = new BeanResult(validFieldResultList.get(0).getTips(), validFieldResultList);
                 break;
             }
 
@@ -74,30 +73,20 @@ public class ValidFieldInterceptor implements MethodInterceptor {
         } else {
             logger.info("请求URL参数：该方法缺少HttpServletRequest参数无法读取请求URL参数 ");
         }
-        // 如果参数错误则直接包装返回结果，不继续往下执行
-        if (fieldResultList != null && fieldResultList.size() > 0) {
+        if (!beanResult.isPass()) {
             logger.warn("参数校验不通过：" + fullName);
-            logger.warn("响应内容：" + fieldResultList.toString());
+            logger.warn("响应内容：" + beanResult.getMessage());
             // 如果该注解存在
             if (!arg0.getMethod().getReturnType().getName().equals("void") && (responseBody != null || restController != null)) {
-                if (fieldResultList != null && fieldResultList.size() == 1) {
-                    return baseController.parameterHint(fieldResultList.get(0).getTips());
-                } else {
-                    return baseController.parameterHint("参数错误", fieldResultList);
-                }
+                return baseController.parameterHint(beanResult.getMessage());
             } else if (baseController.getRequest() != null && baseController.getResponse() != null) {
-                if (fieldResultList != null && fieldResultList.size() == 1) {
-                    baseController.parameterHintJSONP(fieldResultList.get(0).getTips());
-                } else {
-                    baseController.parameterHintJSONP("参数错误", fieldResultList);
-                }
+                baseController.parameterHintJSONP(beanResult.getMessage());
             } else {
-                logger.error("参数错误：" + fieldResultList);
+                logger.error("参数错误：" + beanResult.getMessage());
             }
             return null;
         }
         logger.info("参数校验通过：" + fullName);
-        // 参数无错误则执行方法并返回返回值
         return arg0.proceed();
     }
 

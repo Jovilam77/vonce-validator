@@ -1,6 +1,6 @@
 package cn.vonce.validator.annotation;
 
-import cn.vonce.validator.rule.impl.ValidateCellphone;
+import cn.vonce.validator.rule.impl.ValidatePhone;
 
 import java.lang.annotation.*;
 
@@ -15,11 +15,11 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD, ElementType.PARAMETER })
 @Documented
-@Validate(type = ValidateCellphone.class)
-public @interface VPhoneNum {
+@Validate(type = ValidatePhone.class)
+public @interface VPhone {
 
 	public enum VPhoneType {
-		MOBILEPHONE("手机号码"), TELEPHONE("电话号码"), CHINATELECOM("中国电信号码"), CHINAUNICOM("中国联通号码"), CHINAMOBILE("中国移动号码");
+		MOBILEPHONE("手机号码"), TELEPHONE("电话号码");
 		private String name;
 
 		private VPhoneType() {
@@ -57,10 +57,10 @@ public @interface VPhoneNum {
 	 * @date 2017年4月21日上午10:49:41
 	 * @return
 	 */
-	String value() default "号码不正确";
+	String value() default "";
 
 	/**
-	 * 该字段在某分组进行校验
+	 * 分组校验
 	 * 
 	 * @author Jovi
 	 * @date 2017年6月21日下午12:07:25

@@ -2,11 +2,9 @@ package cn.vonce.validator.rule.impl;
 
 import cn.vonce.common.utils.ValidatorUtil;
 import cn.vonce.validator.annotation.VUserName;
-import cn.vonce.validator.helper.ValidFieldHelper;
+import cn.vonce.validator.helper.WhatType;
 import cn.vonce.validator.model.FieldInfo;
-import cn.vonce.validator.model.FieldResult;
-import cn.vonce.validator.rule.ValidateRule;
-import cn.vonce.validator.utils.ValidFieldUtil;
+import cn.vonce.validator.rule.AbstractValidate;
 
 /**
  * 校验用户名
@@ -16,25 +14,24 @@ import cn.vonce.validator.utils.ValidFieldUtil;
  * @email imjovi@qq.com
  * @date 2020/1/19 15:28
  */
-public class ValidateUserName implements ValidateRule<VUserName> {
+public class ValidateUserName extends AbstractValidate<VUserName> {
 
     @Override
-    public FieldResult handle(VUserName valid, FieldInfo fieldInfo) {
-        String anticipate = "'标准用户名格式'";
-        String tips = ValidFieldUtil.getTips(fieldInfo.getName(), valid.value(), anticipate);
-        if (ValidFieldUtil.isNeedValidation(valid.onlyWhenNotEmpty(), fieldInfo.getValue())) {
-            if (fieldInfo.getValue() == null) {
-                return new FieldResult(fieldInfo.getName(), tips, "等于null");
-            }
-            ValidFieldHelper.WhatType whatType = ValidFieldHelper.whatType(fieldInfo.getValue().getClass().getSimpleName());
-            if (whatType != ValidFieldHelper.WhatType.STRING_TYPE) {
-                return new FieldResult(fieldInfo.getName(), tips, "仅支持String类型校验");
-            }
-            if (!ValidatorUtil.isUsername(fieldInfo.getValue().toString())) {
-                return new FieldResult(fieldInfo.getName(), tips, ValidFieldUtil.getError(anticipate));
-            }
+    public WhatType[] type() {
+        return new WhatType[]{WhatType.STRING_TYPE};
+    }
+
+    @Override
+    public String getAnticipate(VUserName valid) {
+        return "'标准用户名格式'";
+    }
+
+    @Override
+    public boolean check(VUserName valid, FieldInfo fieldInfo) {
+        if (!ValidatorUtil.isUsername(fieldInfo.getValue().toString())) {
+            return false;
         }
-        return new FieldResult(true, fieldInfo.getName());
+        return true;
     }
 
 }

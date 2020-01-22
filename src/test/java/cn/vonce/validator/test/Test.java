@@ -1,8 +1,8 @@
 package cn.vonce.validator.test;
 
-import cn.vonce.validator.helper.ValidFieldHelper;
+import cn.vonce.validator.helper.ValidatorHelper;
+import cn.vonce.validator.model.BeanResult;
 import cn.vonce.validator.model.FieldResult;
-import java.util.List;
 
 /**
  * @author Jovi
@@ -14,7 +14,6 @@ public class Test {
 
     public static void main(String[] agrs) {
         testUser();
-//        testAnnotaion();
     }
 
     public static void testUser() {
@@ -27,12 +26,17 @@ public class Test {
         user.setVip2("123");
         user.setEmail("766255988@qq.com");
         user.setEmail2("766255988@qq.com");
-        user.setPhone("123456789111");
+        user.setPhone("14168000000");
 
-        List<FieldResult> fieldResultList = ValidFieldHelper.validBean(user, "", false);
-        for (FieldResult fieldResult : fieldResultList) {
-            System.out.println("返回提示：" + fieldResult.getTips() + "，错误原因：" + fieldResult.getName()  + fieldResult.getError());
+        BeanResult beanResult = ValidatorHelper.validBean(user, "", false);
+        if (!beanResult.isPass()) {
+            for (FieldResult fieldResult : beanResult.getFieldResultList()) {
+                System.out.println("返回提示：" + fieldResult.getTips() + "，错误原因：" + fieldResult.getName() + fieldResult.getError());
+            }
+        } else {
+            System.out.println("恭喜！没有错误！");
         }
+
     }
 
 

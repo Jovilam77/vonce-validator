@@ -19,7 +19,7 @@ import java.lang.annotation.*;
 public @interface VEqualTo {
 
 	/**
-	 * 标识该名称 用于拼接消息提示
+	 * 字段名称
 	 *
 	 * @author jovi
 	 * @date 2018年1月17日上午9:54:50
@@ -55,7 +55,7 @@ public @interface VEqualTo {
 	String field() default "";
 
 	/**
-	 * 该字段在某分组进行校验
+	 * 分组校验
 	 * 
 	 * @author Jovi
 	 * @date 2018年1月17日上午10:24:51

@@ -19,7 +19,7 @@ import java.lang.annotation.*;
 public @interface VUrl {
 
     /**
-     * 标识该名称 用于拼接消息提示
+     * 字段名称
      *
      * @return
      * @author jovi
@@ -41,7 +41,7 @@ public @interface VUrl {
      * @author jovi
      * @date 2017年4月21日上午10:49:47
      */
-    String value() default "URl格式不正确";
+    String value() default "";
 
     /**
      * 校验URl格式是否正确
@@ -53,7 +53,7 @@ public @interface VUrl {
     boolean val() default true;
 
     /**
-     * 该字段在某分组进行校验
+     * 分组校验
      *
      * @return
      * @author Jovi

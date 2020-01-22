@@ -38,6 +38,7 @@ public class User {
 
     @VNumber(val = VNumber.NumType.INTEGER)
     @VMaxLength(val = 11)
+    @VPhone
     private String phone;
 
     public Integer getId() {

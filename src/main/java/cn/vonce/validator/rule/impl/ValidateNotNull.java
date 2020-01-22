@@ -1,10 +1,9 @@
 package cn.vonce.validator.rule.impl;
 
 import cn.vonce.validator.annotation.VNotNull;
+import cn.vonce.validator.helper.WhatType;
 import cn.vonce.validator.model.FieldInfo;
-import cn.vonce.validator.model.FieldResult;
-import cn.vonce.validator.rule.ValidateRule;
-import cn.vonce.validator.utils.ValidFieldUtil;
+import cn.vonce.validator.rule.AbstractValidate;
 
 /**
  * 校验字段不能为null
@@ -14,16 +13,21 @@ import cn.vonce.validator.utils.ValidFieldUtil;
  * @email imjovi@qq.com
  * @date 2020/1/19 15:34
  */
-public class ValidateNotNull implements ValidateRule<VNotNull> {
+public class ValidateNotNull extends AbstractValidate<VNotNull> {
 
     @Override
-    public FieldResult handle(VNotNull valid, FieldInfo fieldInfo) {
-        String anticipate = "'不能为null'";
-        String tips = ValidFieldUtil.getTips(fieldInfo.getName(), valid.value(), anticipate);
-        if (fieldInfo.getValue() == null) {
-            return new FieldResult(fieldInfo.getName(), tips, ValidFieldUtil.getError(anticipate));
-        }
-        return new FieldResult(true, fieldInfo.getName());
+    public WhatType[] type() {
+        return null;
+    }
+
+    @Override
+    public String getAnticipate(VNotNull valid) {
+        return "'不能为null'";
+    }
+
+    @Override
+    public boolean check(VNotNull valid, FieldInfo fieldInfo) {
+        return false;
     }
 
 }

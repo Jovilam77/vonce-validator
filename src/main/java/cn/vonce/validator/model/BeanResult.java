@@ -10,9 +10,25 @@ import java.util.List;
  */
 public class BeanResult {
 
-    private boolean pass;
-    private String error;
+    public BeanResult() {
+    }
 
+    public BeanResult(boolean pass, String message) {
+        this.pass = pass;
+        this.message = message;
+    }
+
+    public BeanResult(String message) {
+        this.message = message;
+    }
+
+    public BeanResult(String message, List<FieldResult> fieldResultList) {
+        this.message = message;
+        this.fieldResultList = fieldResultList;
+    }
+
+    private boolean pass;
+    private String message;
     private List<FieldResult> fieldResultList;
 
     public boolean isPass() {
@@ -23,12 +39,12 @@ public class BeanResult {
         this.pass = pass;
     }
 
-    public String getError() {
-        return error;
+    public String getMessage() {
+        return message;
     }
 
-    public void setError(String error) {
-        this.error = error;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public List<FieldResult> getFieldResultList() {
@@ -43,7 +59,7 @@ public class BeanResult {
     public String toString() {
         return "BeanResult{" +
                 "pass=" + pass +
-                ", error='" + error + '\'' +
+                ", message='" + message + '\'' +
                 ", fieldResultList=" + fieldResultList +
                 '}';
     }

@@ -19,7 +19,7 @@ import java.lang.annotation.*;
 public @interface VIDCard {
 
 	/**
-	 * 标识该名称 用于拼接消息提示
+	 * 字段名称
 	 * 
 	 * @author jovi
 	 * @date 2017年4月21日上午11:56:34
@@ -40,10 +40,10 @@ public @interface VIDCard {
 	 * @date 2017年4月21日上午10:49:47
 	 * @return
 	 */
-	String value() default "身份证号码格式不正确";
+	String value() default "";
 	
 	/**
-	 * 该字段在某分组进行校验
+	 * 分组校验
 	 * 
 	 * @author Jovi
 	 * @date 2017年6月21日下午12:07:25

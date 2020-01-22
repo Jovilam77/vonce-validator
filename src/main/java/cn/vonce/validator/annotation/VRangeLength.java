@@ -5,7 +5,7 @@ import cn.vonce.validator.rule.impl.ValidateRangeLength;
 import java.lang.annotation.*;
 
 /**
- * 校验字段长度范围
+ * 校验长度范围
  *
  * @author jovi
  * @version 1.0
@@ -19,7 +19,7 @@ import java.lang.annotation.*;
 public @interface VRangeLength {
 
     /**
-     * 标识该字段名称 用于拼接消息提示
+     * 字段名称
      *
      * @return
      * @author jovi
@@ -60,10 +60,10 @@ public @interface VRangeLength {
      * @author jovi
      * @date 2017年4月21日上午10:50:21
      */
-    String value() default "字段长度最大为%s,最小为%s";
+    String value() default "";
 
     /**
-     * 该字段在某分组进行校验
+     * 分组校验
      *
      * @return
      * @author Jovi

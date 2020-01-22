@@ -2,8 +2,9 @@ package cn.vonce.validator.rule.impl;
 
 import cn.vonce.common.utils.IdCardUtil;
 import cn.vonce.validator.annotation.VIDCard;
+import cn.vonce.validator.helper.WhatType;
 import cn.vonce.validator.model.FieldInfo;
-import cn.vonce.validator.rule.ValidateString;
+import cn.vonce.validator.rule.AbstractValidate;
 
 /**
  * 校验身份证号码
@@ -13,7 +14,12 @@ import cn.vonce.validator.rule.ValidateString;
  * @email imjovi@qq.com
  * @date 2020/1/19 15:23
  */
-public class ValidateIDCard extends ValidateString<VIDCard> /*implements ValidateRule<VIDCard>*/ {
+public class ValidateIDCard extends AbstractValidate<VIDCard> {
+
+    @Override
+    public WhatType[] type() {
+        return new WhatType[]{WhatType.STRING_TYPE};
+    }
 
     @Override
     public String getAnticipate(VIDCard valid) {
@@ -28,25 +34,5 @@ public class ValidateIDCard extends ValidateString<VIDCard> /*implements Validat
         }
         return true;
     }
-
-    /*@Override
-    public FieldResult handle(VIDCard valid, FieldInfo fieldInfo) {
-        String anticipate = "'标准身份证号码格式'";
-        String tips = ValidFieldUtil.getTips(fieldInfo.getName(), valid.value(), anticipate);
-        if (ValidFieldUtil.isNeedValidation(valid.onlyWhenNotEmpty(), fieldInfo.getValue())) {
-            if (fieldInfo.getValue() == null) {
-                return new FieldResult(fieldInfo.getName(), tips, "等于null");
-            }
-            ValidFieldHelper.WhatType whatType = ValidFieldHelper.whatType(fieldInfo.getValue().getClass().getSimpleName());
-            if (whatType != ValidFieldHelper.WhatType.STRING_TYPE) {
-                return new FieldResult(fieldInfo.getName(), tips, "仅支持String类型校验");
-            }
-            IdCardUtil.Result idCardResult = IdCardUtil.validate(fieldInfo.getValue().toString());
-            if (!idCardResult.isOk()) {
-                return new FieldResult(fieldInfo.getName(), tips, ValidFieldUtil.getError(anticipate) + "," + idCardResult.getMessage());
-            }
-        }
-        return new FieldResult(true, fieldInfo.getName());
-    }*/
 
 }

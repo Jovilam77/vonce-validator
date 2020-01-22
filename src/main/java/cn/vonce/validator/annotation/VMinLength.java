@@ -4,7 +4,7 @@ import cn.vonce.validator.rule.impl.ValidateMinLength;
 import java.lang.annotation.*;
 
 /**
- * 校验字段最小长度
+ * 校验设置的最小长度
  * 
  * @author jovi
  * @email 766255988@qq.com
@@ -18,7 +18,7 @@ import java.lang.annotation.*;
 public @interface VMinLength {
 	
 	/**
-	 * 标识该字段名称 用于拼接消息提示
+	 * 字段名称
 	 * 
 	 * @author jovi
 	 * @date 2017年4月21日上午11:56:34
@@ -51,7 +51,7 @@ public @interface VMinLength {
 	String value() default "";
 	
 	/**
-	 * 该字段在某分组进行校验
+	 * 分组校验
 	 * 
 	 * @author Jovi
 	 * @date 2017年6月21日下午12:07:25

@@ -1,11 +1,9 @@
 package cn.vonce.validator.rule.impl;
 
 import cn.vonce.validator.annotation.VNumber;
-import cn.vonce.validator.helper.ValidFieldHelper;
+import cn.vonce.validator.helper.WhatType;
 import cn.vonce.validator.model.FieldInfo;
-import cn.vonce.validator.model.FieldResult;
-import cn.vonce.validator.rule.ValidateRule;
-import cn.vonce.validator.utils.ValidFieldUtil;
+import cn.vonce.validator.rule.AbstractValidate;
 import org.apache.commons.lang.math.NumberUtils;
 
 /**
@@ -16,10 +14,15 @@ import org.apache.commons.lang.math.NumberUtils;
  * @email imjovi@qq.com
  * @date 2020/1/19 16:46
  */
-public class ValidateNumber implements ValidateRule<VNumber> {
+public class ValidateNumber extends AbstractValidate<VNumber> {
 
     @Override
-    public FieldResult handle(VNumber valid, FieldInfo fieldInfo) {
+    public WhatType[] type() {
+        return new WhatType[]{WhatType.STRING_TYPE};
+    }
+
+    @Override
+    public String getAnticipate(VNumber valid) {
         String anticipate = "";
         if (valid.val() == VNumber.NumType.NUMBER) {
             anticipate = "'数字类型'";
@@ -28,33 +31,30 @@ public class ValidateNumber implements ValidateRule<VNumber> {
         } else if (valid.val() == VNumber.NumType.FLOAT) {
             anticipate = "'浮点类型'";
         }
-        String tips = ValidFieldUtil.getTips(fieldInfo.getName(), valid.value(), anticipate);
-        if (fieldInfo.getValue() == null) {
-            return new FieldResult(fieldInfo.getName(), tips, "等于null");
-        }
-        ValidFieldHelper.WhatType whatType = ValidFieldHelper.whatType(fieldInfo.getValue().getClass().getSimpleName());
-        if (whatType != ValidFieldHelper.WhatType.STRING_TYPE) {
-            return new FieldResult(fieldInfo.getName(), tips, "仅支持String类型校验");
-        }
+        return anticipate;
+    }
+
+    @Override
+    public boolean check(VNumber valid, FieldInfo fieldInfo) {
         int index = fieldInfo.getValue().toString().indexOf(".");
         switch (valid.val()) {
             case NUMBER:
                 if (!NumberUtils.isNumber(fieldInfo.getValue().toString())) {
-                    return new FieldResult(fieldInfo.getName(), tips, ValidFieldUtil.getError(anticipate));
+                    return false;
                 }
                 break;
             case INTEGER:
                 if (!NumberUtils.isNumber(fieldInfo.getValue().toString()) || (index > -1 && index < fieldInfo.getValue().toString().length() - 1)) {
-                    return new FieldResult(fieldInfo.getName(), tips, ValidFieldUtil.getError(anticipate));
+                    return false;
                 }
                 break;
             case FLOAT:
                 if (!NumberUtils.isNumber(fieldInfo.getValue().toString()) || (index == -1 || index == fieldInfo.getValue().toString().length() - 1)) {
-                    return new FieldResult(fieldInfo.getName(), tips, ValidFieldUtil.getError(anticipate));
+                    return false;
                 }
                 break;
         }
-        return new FieldResult(true, fieldInfo.getName());
+        return true;
     }
 
 }

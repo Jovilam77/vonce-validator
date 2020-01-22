@@ -5,7 +5,7 @@ import cn.vonce.validator.rule.impl.ValidateSQLInject;
 import java.lang.annotation.*;
 
 /**
- * 校验字段是否存在sql注入
+ * 校验是否存在sql注入
  *
  * @author Jovi
  * @version 1.0
@@ -19,7 +19,7 @@ import java.lang.annotation.*;
 public @interface VSQLInject {
 
     /**
-     * 标识该名称 用于拼接消息提示
+     * 字段名称
      *
      * @return
      * @author Jovi
@@ -41,10 +41,10 @@ public @interface VSQLInject {
      * @author Jovi
      * @date 2018年2月28日下午8:12:40
      */
-    String value() default "非法字段";
+    String value() default "";
 
     /**
-     * 该字段在某分组进行校验
+     * 分组校验
      *
      * @return
      * @author Jovi

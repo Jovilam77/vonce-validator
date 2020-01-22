@@ -5,7 +5,7 @@ import cn.vonce.validator.rule.impl.ValidateNotNull;
 import java.lang.annotation.*;
 
 /**
- * 校验字段不能为null
+ * 校验不能为null
  *
  * @author jovi
  * @version 1.0
@@ -19,7 +19,7 @@ import java.lang.annotation.*;
 public @interface VNotNull {
 
     /**
-     * 标识该字段名称 用于拼接消息提示
+     * 字段名称
      *
      * @return
      * @author jovi
@@ -34,10 +34,10 @@ public @interface VNotNull {
      * @author jovi
      * @date 2017年4月21日上午10:50:02
      */
-    String value() default "字段不能为null";
+    String value() default "";
 
     /**
-     * 该字段在某分组进行校验
+     * 分组校验
      *
      * @return
      * @author Jovi

@@ -34,7 +34,7 @@ public @interface VChinese {
     }
 
     /**
-     * 标识该名称 用于拼接消息提示
+     * 字段名称
      *
      * @return
      * @author jovi
@@ -68,7 +68,7 @@ public @interface VChinese {
     ChineseType val() default ChineseType.IS_CHINESE_NOT_HAS_SYMBOL;
 
     /**
-     * 该字段在某分组进行校验
+     * 分组校验
      *
      * @return
      * @author Jovi

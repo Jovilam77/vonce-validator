@@ -5,7 +5,7 @@ import cn.vonce.validator.rule.impl.ValidateMaxValue;
 import java.lang.annotation.*;
 
 /**
- * 校验字段最小值
+ * 校验设置的最大值
  * 
  * @author jovi
  * @email 766255988@qq.com
@@ -19,7 +19,7 @@ import java.lang.annotation.*;
 public @interface VMaxValue {
 
 	/**
-	 * 标识该字段名称 用于拼接消息提示
+	 * 字段名称
 	 * 
 	 * @author jovi
 	 * @date 2017年4月21日上午11:56:34
@@ -43,10 +43,10 @@ public @interface VMaxValue {
 	 * @date 2017年4月21日上午10:48:29
 	 * @return
 	 */
-	String value() default "字段值大于最大值%s";
+	String value() default "";
 	
 	/**
-	 * 该字段在某分组进行校验
+	 * 分组校验
 	 * 
 	 * @author Jovi
 	 * @date 2017年6月21日下午12:07:25

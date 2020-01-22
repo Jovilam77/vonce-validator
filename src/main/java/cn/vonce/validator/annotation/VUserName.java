@@ -18,7 +18,7 @@ import java.lang.annotation.*;
 public @interface VUserName {
 
     /**
-     * 标识该名称 用于拼接消息提示
+     * 字段名称
      *
      * @return
      * @author jovi
@@ -40,10 +40,10 @@ public @interface VUserName {
      * @author jovi
      * @date 2017年4月21日上午10:49:47
      */
-    String value() default "用户名格式不正确";
+    String value() default "";
 
     /**
-     * 该字段在某分组进行校验
+     * 分组校验
      *
      * @return
      * @author Jovi

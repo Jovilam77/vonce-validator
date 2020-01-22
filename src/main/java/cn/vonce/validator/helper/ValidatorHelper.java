@@ -1,9 +1,10 @@
 package cn.vonce.validator.helper;
 
 import cn.vonce.validator.annotation.Validate;
+import cn.vonce.validator.model.BeanResult;
 import cn.vonce.validator.model.FieldInfo;
 import cn.vonce.validator.model.FieldResult;
-import cn.vonce.validator.utils.ValidFieldUtil;
+import cn.vonce.validator.utils.ValidatorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,22 +23,9 @@ import java.util.List;
  * @email 766255988@qq.com
  * @date 2017年4月20日下午6:48:08
  */
-public class ValidFieldHelper {
+public class ValidatorHelper {
 
-    private static Logger logger = LoggerFactory.getLogger(ValidFieldHelper.class);
-
-    /**
-     * STRING_TYPE 字符串类型<br>
-     * PACK_TYPE 包装类型 OBJECT_TYPE 对象类型 VALUE_TYPE 值类型
-     *
-     * @author jovi
-     * @version 1.0
-     * @email 766255988@qq.com
-     * @date 2017年6月2日下午5:24:16
-     */
-    public static enum WhatType {
-        STRING_TYPE, VALUE_TYPE, BOOL_TYPE, DATE_TYPE, OBJECT_TYPE
-    }
+    private static Logger logger = LoggerFactory.getLogger(ValidatorHelper.class);
 
     /**
      * 校验bean
@@ -49,17 +37,12 @@ public class ValidFieldHelper {
      * @author Jovi
      * @date 2018年1月17日下午7:33:27
      */
-    public static List<FieldResult> validBean(Object beanObject, String group, boolean interrupt) {
-        // 消息提示列表
-        List<FieldResult> fieldResultList = new ArrayList<>();
-        // 不能为空
+    public static BeanResult validBean(Object beanObject, String group, boolean interrupt) {
         if (beanObject == null) {
-//            fieldResultList.add(new FieldResult("bean参数不能为空"));
-            return fieldResultList;
+            return new BeanResult("bean" + ValidatorUtil.getNullError());
         }
-        // 获取bean 全部字段
         Field[] fields = beanObject.getClass().getDeclaredFields();
-        // 遍历bean 全部字段
+        List<FieldResult> fieldResultList = new ArrayList<>();
         for (int i = 0; i < fields.length; i++) {
             try {
                 fields[i].setAccessible(true);
@@ -71,14 +54,20 @@ public class ValidFieldHelper {
                     }
                 }
             } catch (SecurityException e) {
-//                fieldResultList.add(new FieldResult(e.getMessage()));
+                logger.error(e.getMessage(), e);
+                return new BeanResult("SecurityException" + e.getMessage());
             } catch (IllegalAccessException e) {
-//                fieldResultList.add(new FieldResult(e.getMessage()));
+                logger.error(e.getMessage(), e);
+                return new BeanResult("SecurityException" + e.getMessage());
             } catch (IllegalArgumentException e) {
-//                fieldResultList.add(new FieldResult(e.getMessage()));
+                logger.error(e.getMessage(), e);
+                return new BeanResult("SecurityException" + e.getMessage());
             }
         }
-        return fieldResultList;
+        if (!fieldResultList.isEmpty()) {
+            return new BeanResult(fieldResultList.get(0).getTips(), fieldResultList);
+        }
+        return new BeanResult(true, "校验通过");
     }
 
     /**
@@ -97,18 +86,18 @@ public class ValidFieldHelper {
     public static List<FieldResult> valid(Annotation[] annotations, String fieldName, Object fieldValue, Object beanObject, String group, boolean interrupt) {
         // 消息提示列表
         List<FieldResult> fieldResultList = new ArrayList<>();
+        FieldInfo fieldInfo = null;
+        String annName = "";
+        String annValue = "";
+        boolean annOnlyWhenNotEmpty = false;
+        String[] groups = null;
         try {
-            // 遍历该字段或参数的注解数组 存在的注解才进行校验
             for (int i = 0; i < annotations.length; i++) {
                 // 判断此注解是否为遵循校验规范的注解
                 Validate validate = annotations[i].annotationType().getAnnotation(Validate.class);
                 if (validate == null) {
                     continue;
                 }
-                String annName = "";
-                String annValue = "";
-                boolean annOnlyWhenNotEmpty = false;
-                String[] groups = null;
                 for (Method method : annotations[i].annotationType().getMethods()) {
                     Object methodResult;
                     if ("name".equals(method.getName())) {
@@ -137,13 +126,14 @@ public class ValidFieldHelper {
                     }
                 }
                 if (isMust) {
-                    FieldInfo fieldInfo = new FieldInfo();
-                    fieldInfo.setName(ValidFieldUtil.getName(fieldName, annName));
+                    fieldInfo = new FieldInfo();
+                    fieldInfo.setName(ValidatorUtil.getFieldName(fieldName, annName));
                     fieldInfo.setTips(annValue);
                     fieldInfo.setValue(fieldValue);
                     fieldInfo.setBean(beanObject);
                     fieldInfo.setOnlyWhenNotEmpty(annOnlyWhenNotEmpty);
-                    FieldResult fieldResult = execute(validate.type(), annotations[i], fieldInfo);
+                    Method method = validate.type().getMethod("handle", Annotation.class, FieldInfo.class);
+                    FieldResult fieldResult = (FieldResult) method.invoke(validate.type().newInstance(), annotations[i], fieldInfo);
                     if (fieldResult != null && !fieldResult.getPass()) {
                         fieldResultList.add(fieldResult);
                         if (interrupt) {
@@ -153,59 +143,31 @@ public class ValidFieldHelper {
                 }
             }
         } catch (SecurityException e) {
-//            fieldResultList.add(new FieldResult(e.getMessage()));
+            logger.error(e.getMessage(), e);
+            fieldResultList.add(new FieldResult(fieldInfo.getName(), "出现异常", "SecurityException：" + e.getMessage()));
+            return fieldResultList;
         } catch (IllegalAccessException e) {
-//            fieldResultList.add(new FieldResult(e.getMessage()));
+            logger.error(e.getMessage(), e);
+            fieldResultList.add(new FieldResult(fieldInfo.getName(), "出现异常", "IllegalAccessException：" + e.getMessage()));
+            return fieldResultList;
         } catch (IllegalArgumentException e) {
-//            fieldResultList.add(new FieldResult(e.getMessage()));
+            logger.error(e.getMessage(), e);
+            fieldResultList.add(new FieldResult(fieldInfo.getName(), "出现异常", "IllegalArgumentException：" + e.getMessage()));
+            return fieldResultList;
         } catch (InvocationTargetException e) {
-//            fieldResultList.add(new FieldResult(e.getMessage()));
+            logger.error(e.getMessage(), e);
+            fieldResultList.add(new FieldResult(fieldInfo.getName(), "出现异常", "InvocationTargetException：" + e.getMessage()));
+            return fieldResultList;
+        } catch (NoSuchMethodException e) {
+            logger.error(e.getMessage(), e);
+            fieldResultList.add(new FieldResult(fieldInfo.getName(), "出现异常", "NoSuchMethodException：" + e.getMessage()));
+            return fieldResultList;
+        } catch (InstantiationException e) {
+            logger.error(e.getMessage(), e);
+            fieldResultList.add(new FieldResult(fieldInfo.getName(), "出现异常", "InstantiationException：" + e.getMessage()));
+            return fieldResultList;
         }
         return fieldResultList;
-    }
-
-    /**
-     * 进行规则校验
-     *
-     * @param clazz
-     * @param annotation
-     * @return
-     * @author Jovi
-     * @date 2018年1月28日下午11:07:02
-     */
-    private static FieldResult execute(Class<?> clazz, Annotation annotation, FieldInfo fieldInfo) {
-        FieldResult fieldResult = new FieldResult();
-        try {
-            Method method = clazz.getMethod("handle", annotation.annotationType(), FieldInfo.class);
-            if (method != null) {
-                Object methodResult = method.invoke(clazz.newInstance(), annotation, fieldInfo);
-                if (methodResult != null) {
-                    fieldResult = (FieldResult) methodResult;
-                }
-            } else {
-                fieldResult.setTips("字段校验失败，该注解未指定校验方法：" + annotation.annotationType().getName());
-                return fieldResult;
-            }
-        } catch (SecurityException e) {
-
-            fieldResult.setTips(e.getMessage());
-        } catch (IllegalAccessException e) {
-            fieldResult.setTips(e.getMessage());
-            logger.error(e.getMessage(), e);
-        } catch (IllegalArgumentException e) {
-            fieldResult.setTips(e.getMessage());
-            logger.error(e.getMessage(), e);
-        } catch (InvocationTargetException e) {
-            fieldResult.setTips(e.getMessage());
-            logger.error(e.getMessage(), e);
-        } catch (NoSuchMethodException e) {
-            fieldResult.setTips("没有找到该方法，请检查方法名与参数是否正确：" + e.getMessage());
-            logger.error(e.getMessage(), e);
-        } catch (InstantiationException e) {
-            fieldResult.setTips(e.getMessage());
-            logger.error(e.getMessage(), e);
-        }
-        return fieldResult;
     }
 
     /**
@@ -268,4 +230,5 @@ public class ValidFieldHelper {
         }
         return whatType;
     }
+
 }
