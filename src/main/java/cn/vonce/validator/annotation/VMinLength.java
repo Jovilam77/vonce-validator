@@ -6,8 +6,8 @@ import java.lang.annotation.*;
 /**
  * 校验设置的最小长度
  * 
- * @author jovi
- * @email 766255988@qq.com
+ * @author Jovi
+ * @email imjovi@qq.com
  * @version 1.0
  * @date 2017年4月20日下午6:44:17
  */
@@ -20,7 +20,7 @@ public @interface VMinLength {
 	/**
 	 * 字段名称
 	 * 
-	 * @author jovi
+	 * @author Jovi
 	 * @date 2017年4月21日上午11:56:34
 	 * @return
 	 */
@@ -29,7 +29,7 @@ public @interface VMinLength {
 	/**
 	 * 校验字段最小长度值
 	 * 
-	 * @author jovi
+	 * @author Jovi
 	 * @date 2017年4月21日上午10:49:24
 	 * @return
 	 */
@@ -44,7 +44,7 @@ public @interface VMinLength {
 	/**
 	 * 消息提示
 	 * 
-	 * @author jovi
+	 * @author Jovi
 	 * @date 2017年4月21日上午10:49:31
 	 * @return
 	 */

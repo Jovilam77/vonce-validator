@@ -7,8 +7,8 @@ import java.lang.annotation.*;
 /**
  * 校验手机或电话格式
  * 
- * @author jovi
- * @email 766255988@qq.com
+ * @author Jovi
+ * @email imjovi@qq.com
  * @version 1.0
  * @date 2017年4月23日下午3:28:47
  */
@@ -53,7 +53,7 @@ public @interface VPhone {
 	/**
 	 * 消息提示
 	 * 
-	 * @author jovi
+	 * @author Jovi
 	 * @date 2017年4月21日上午10:49:41
 	 * @return
 	 */

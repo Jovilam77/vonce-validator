@@ -7,8 +7,8 @@ import java.lang.annotation.*;
 /**
  * 校验值范围
  * 
- * @author jovi
- * @email 766255988@qq.com
+ * @author Jovi
+ * @email imjovi@qq.com
  * @version 1.0
  * @date 2017年4月21日上午10:51:33
  */
@@ -21,7 +21,7 @@ public @interface VRangeValue {
 	/**
 	 * 字段名称
 	 * 
-	 * @author jovi
+	 * @author Jovi
 	 * @date 2017年4月21日上午11:56:34
 	 * @return
 	 */
@@ -30,7 +30,7 @@ public @interface VRangeValue {
 	/**
 	 * 校验字段最大值
 	 * 
-	 * @author jovi
+	 * @author Jovi
 	 * @date 2017年4月21日上午10:52:07
 	 * @return
 	 */
@@ -39,7 +39,7 @@ public @interface VRangeValue {
 	/**
 	 * 校验字段最小值
 	 * 
-	 * @author jovi
+	 * @author Jovi
 	 * @date 2017年4月21日上午10:52:14
 	 * @return
 	 */
@@ -48,7 +48,7 @@ public @interface VRangeValue {
 	/**
 	 * 消息提示
 	 * 
-	 * @author jovi
+	 * @author Jovi
 	 * @date 2017年4月21日上午10:52:20
 	 * @return
 	 */

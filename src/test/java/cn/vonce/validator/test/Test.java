@@ -24,8 +24,8 @@ public class Test {
         user.setAge(120);
         user.setVip(false);
         user.setVip2("123");
-        user.setEmail("766255988@qq.com");
-        user.setEmail2("766255988@qq.com");
+        user.setEmail("imjovi@qq.com");
+        user.setEmail2("imjovi@qq.com");
         user.setPhone("14168000000");
 
         BeanResult beanResult = ValidatorHelper.validBean(user, "", false);

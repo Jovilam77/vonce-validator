@@ -33,7 +33,7 @@ public class User {
     private String email;
 
 //    @VEqualTo(field = "email")
-    @VEqualTo(val = "766255988@qq.com")
+    @VEqualTo(val = "imjovi@qq.com")
     private String email2;
 
     @VNumber(val = VNumber.NumType.INTEGER)

@@ -8,7 +8,7 @@ import java.lang.annotation.*;
  * 校验该字段值是否与指定的值一致(主要应用场景：确认密码与密码是否一致)
  * 
  * @author Jovi
- * @email 766255988@qq.com
+ * @email imjovi@qq.com
  * @version 1.0
  * @date 2018年1月17日上午9:53:25
  */
@@ -21,7 +21,7 @@ public @interface VEqualTo {
 	/**
 	 * 字段名称
 	 *
-	 * @author jovi
+	 * @author Jovi
 	 * @date 2018年1月17日上午9:54:50
 	 * @return
 	 */

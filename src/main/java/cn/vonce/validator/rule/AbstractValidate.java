@@ -5,9 +5,12 @@ import cn.vonce.validator.helper.WhatType;
 import cn.vonce.validator.model.FieldInfo;
 import cn.vonce.validator.model.FieldResult;
 import cn.vonce.validator.utils.ValidatorUtil;
+
 import java.lang.annotation.Annotation;
 
 /**
+ * 校验规则抽象实现
+ *
  * @author Jovi
  * @version 1.0
  * @email imjovi@qq.com

@@ -7,9 +7,9 @@ import java.lang.annotation.*;
 /**
  * 校验不能为null
  *
- * @author jovi
+ * @author Jovi
  * @version 1.0
- * @email 766255988@qq.com
+ * @email imjovi@qq.com
  * @date 2017年4月20日下午6:45:26
  */
 @Retention(RetentionPolicy.RUNTIME)
@@ -22,7 +22,7 @@ public @interface VNotNull {
      * 字段名称
      *
      * @return
-     * @author jovi
+     * @author Jovi
      * @date 2017年4月21日上午11:56:34
      */
     String name() default "";
@@ -31,7 +31,7 @@ public @interface VNotNull {
      * 消息提示
      *
      * @return
-     * @author jovi
+     * @author Jovi
      * @date 2017年4月21日上午10:50:02
      */
     String value() default "";

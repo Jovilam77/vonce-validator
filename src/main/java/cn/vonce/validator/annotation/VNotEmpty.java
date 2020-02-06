@@ -7,8 +7,8 @@ import java.lang.annotation.*;
 /**
  * 校验不能为empty(null和空字符串)
  * 
- * @author jovi
- * @email 766255988@qq.com
+ * @author Jovi
+ * @email imjovi@qq.com
  * @version 1.0
  * @date 2017年4月20日下午6:44:47
  */
@@ -21,7 +21,7 @@ public @interface VNotEmpty {
 	/**
 	 * 字段名称
 	 * 
-	 * @author jovi
+	 * @author Jovi
 	 * @date 2017年4月21日上午11:56:34
 	 * @return
 	 */
@@ -30,7 +30,7 @@ public @interface VNotEmpty {
 	/**
 	 * 消息提示
 	 * 
-	 * @author jovi
+	 * @author Jovi
 	 * @date 2017年4月21日上午10:49:47
 	 * @return
 	 */

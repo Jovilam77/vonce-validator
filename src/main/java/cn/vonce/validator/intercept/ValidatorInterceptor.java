@@ -21,9 +21,9 @@ import java.util.List;
 /**
  * 校验字段拦截器
  *
- * @author jovi
+ * @author Jovi
  * @version 1.0
- * @email 766255988@qq.com
+ * @email imjovi@qq.com
  * @date 2017年4月20日下午23:56:08
  */
 public class ValidatorInterceptor implements MethodInterceptor {
@@ -41,7 +41,7 @@ public class ValidatorInterceptor implements MethodInterceptor {
         } else {
             baseController = new BaseController();
         }
-        BeanResult beanResult = null;
+        BeanResult beanResult = new BeanResult(true,"校验通过");
         for (int i = 0; i < arg0.getArguments().length; i++) {
             // 获取实际对象-即为原始对象(可能是Bean，也可能是字段)
             Object object = arg0.getArguments()[i];

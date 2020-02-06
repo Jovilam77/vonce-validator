@@ -7,9 +7,9 @@ import java.lang.annotation.*;
 /**
  * 校验长度范围
  *
- * @author jovi
+ * @author Jovi
  * @version 1.0
- * @email 766255988@qq.com
+ * @email imjovi@qq.com
  * @date 2017年4月20日下午9:59:26
  */
 @Retention(RetentionPolicy.RUNTIME)
@@ -22,7 +22,7 @@ public @interface VRangeLength {
      * 字段名称
      *
      * @return
-     * @author jovi
+     * @author Jovi
      * @date 2017年4月21日上午11:56:34
      */
     String name() default "";
@@ -31,7 +31,7 @@ public @interface VRangeLength {
      * 校验字段最大长度值
      *
      * @return
-     * @author jovi
+     * @author Jovi
      * @date 2017年4月21日上午10:50:11
      */
     int max();
@@ -40,7 +40,7 @@ public @interface VRangeLength {
      * 校验字段最小长度值
      *
      * @return
-     * @author jovi
+     * @author Jovi
      * @date 2017年4月21日上午10:50:16
      */
     int min();
@@ -57,7 +57,7 @@ public @interface VRangeLength {
      * 消息提示
      *
      * @return
-     * @author jovi
+     * @author Jovi
      * @date 2017年4月21日上午10:50:21
      */
     String value() default "";

@@ -7,9 +7,9 @@ import java.lang.annotation.*;
 /**
  * 校验中文
  *
- * @author jovi
+ * @author Jovi
  * @version 1.0
- * @email 766255988@qq.com
+ * @email imjovi@qq.com
  * @date 2017年4月23日下午3:28:47
  */
 @Retention(RetentionPolicy.RUNTIME)
@@ -24,9 +24,9 @@ public @interface VChinese {
      * IS_CHINESE_HAS_SYMBOL 中文汉字或者中文符号的字符串<br>
      * HAS_CHINESE_HAS_SYMBOL 包含中文汉字或者中文符号的字符串
      *
-     * @author jovi
+     * @author Jovi
      * @version 1.0
-     * @email 766255988@qq.com
+     * @email imjovi@qq.com
      * @date 2017年4月24日下午3:46:25
      */
     public static enum ChineseType {
@@ -37,7 +37,7 @@ public @interface VChinese {
      * 字段名称
      *
      * @return
-     * @author jovi
+     * @author Jovi
      * @date 2017年4月21日上午11:56:34
      */
     String name() default "";
@@ -53,7 +53,7 @@ public @interface VChinese {
      * 消息提示
      *
      * @return
-     * @author jovi
+     * @author Jovi
      * @date 2017年4月21日上午10:49:47
      */
     String value() default "";
@@ -62,7 +62,7 @@ public @interface VChinese {
      * 校验是否未中文
      *
      * @return
-     * @author jovi
+     * @author Jovi
      * @date 2017年4月21日上午10:49:41
      */
     ChineseType val() default ChineseType.IS_CHINESE_NOT_HAS_SYMBOL;

@@ -18,9 +18,9 @@ import java.util.List;
 /**
  * 校验字段助手
  *
- * @author jovi
+ * @author Jovi
  * @version 1.0
- * @email 766255988@qq.com
+ * @email imjovi@qq.com
  * @date 2017年4月20日下午6:48:08
  */
 public class ValidatorHelper {
@@ -176,7 +176,7 @@ public class ValidatorHelper {
      * @param annotations
      * @param annotationClass
      * @return
-     * @author jovi
+     * @author Jovi
      * @date 2017年4月20日下午23:15:22
      */
     public static <T extends Annotation> T getAnnotation(Annotation[] annotations, Class<T> annotationClass) {

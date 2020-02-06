@@ -7,9 +7,9 @@ import java.lang.annotation.*;
 /**
  * 校验URl格式
  *
- * @author jovi
+ * @author Jovi
  * @version 1.0
- * @email 766255988@qq.com
+ * @email imjovi@qq.com
  * @date 2017年4月23日下午3:28:47
  */
 @Retention(RetentionPolicy.RUNTIME)
@@ -22,7 +22,7 @@ public @interface VUrl {
      * 字段名称
      *
      * @return
-     * @author jovi
+     * @author Jovi
      * @date 2017年4月21日上午11:56:34
      */
     String name() default "";
@@ -38,7 +38,7 @@ public @interface VUrl {
      * 消息提示
      *
      * @return
-     * @author jovi
+     * @author Jovi
      * @date 2017年4月21日上午10:49:47
      */
     String value() default "";
@@ -47,7 +47,7 @@ public @interface VUrl {
      * 校验URl格式是否正确
      *
      * @return
-     * @author jovi
+     * @author Jovi
      * @date 2017年4月21日上午10:49:41
      */
     boolean val() default true;
