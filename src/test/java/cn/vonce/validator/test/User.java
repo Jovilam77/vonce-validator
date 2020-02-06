@@ -10,7 +10,7 @@ import cn.vonce.validator.annotation.*;
  */
 public class User {
 
-    @VMinValue(val = 1, value = "id最小从1开始")
+    @VMinValue(val = 1, value = "id最小从1开始",group = {"user.add","user.update"})
     private Integer id;
 
     @VNotEmpty("名字不能为空")

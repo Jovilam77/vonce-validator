@@ -59,7 +59,7 @@ public @interface VChinese {
     String value() default "";
 
     /**
-     * 校验是否未中文
+     * 校验中文的类型
      *
      * @return
      * @author Jovi

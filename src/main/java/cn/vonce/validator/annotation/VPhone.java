@@ -36,13 +36,13 @@ public @interface VPhone {
 	}
 
 	/**
-	 * 校验号码类型，默认为手机号码
-	 * 
+	 * 字段名称
+	 *
 	 * @author Jovi
-	 * @date 2017年11月3日下午5:51:52
+	 * @date 2017年4月21日上午11:56:34
 	 * @return
 	 */
-	VPhoneType phoneType() default VPhoneType.MOBILEPHONE;
+	String name() default "";
 
 	/**
 	 * 是否只有不为空的时候才校验
@@ -58,6 +58,15 @@ public @interface VPhone {
 	 * @return
 	 */
 	String value() default "";
+
+	/**
+	 * 校验号码类型，默认为手机号码
+	 *
+	 * @author Jovi
+	 * @date 2017年11月3日下午5:51:52
+	 * @return
+	 */
+	VPhoneType phoneType() default VPhoneType.MOBILEPHONE;
 
 	/**
 	 * 分组校验

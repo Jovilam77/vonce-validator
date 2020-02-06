@@ -37,7 +37,7 @@ public @interface VRegex {
      *
      * @return
      */
-    String val() default "";
+    String val();
 
     /**
      * 分组校验

@@ -16,15 +16,6 @@ import java.lang.annotation.*;
 public @interface VBean {
 
     /**
-     * 是否校验bean
-     *
-     * @return
-     * @author Jovi
-     * @date 2017年4月21日上午10:48:49
-     */
-    boolean value() default true;
-
-    /**
      * 需要校验的分组
      *
      * @return

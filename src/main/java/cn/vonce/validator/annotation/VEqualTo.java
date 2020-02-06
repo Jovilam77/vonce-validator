@@ -46,7 +46,7 @@ public @interface VEqualTo {
 	String val() default "";
 
 	/**
-	 * 指定的字段值，如果该值不为空优先使用该值(仅支持bean模式)
+	 * 指定的字段名，如果该值不为空优先使用该值(仅支持bean模式)
 	 * 
 	 * @author Jovi
 	 * @date 2018年1月17日上午9:57:06

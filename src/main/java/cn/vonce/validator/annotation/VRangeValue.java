@@ -28,8 +28,17 @@ public @interface VRangeValue {
 	String name() default "";
 
 	/**
-	 * 校验字段最大值
+	 * 消息提示
 	 * 
+	 * @author Jovi
+	 * @date 2017年4月21日上午10:52:20
+	 * @return
+	 */
+	String value() default "";
+
+	/**
+	 * 校验字段最大值
+	 *
 	 * @author Jovi
 	 * @date 2017年4月21日上午10:52:07
 	 * @return
@@ -38,21 +47,12 @@ public @interface VRangeValue {
 
 	/**
 	 * 校验字段最小值
-	 * 
+	 *
 	 * @author Jovi
 	 * @date 2017年4月21日上午10:52:14
 	 * @return
 	 */
 	double min();
-
-	/**
-	 * 消息提示
-	 * 
-	 * @author Jovi
-	 * @date 2017年4月21日上午10:52:20
-	 * @return
-	 */
-	String value() default "";
 	
 	/**
 	 * 分组校验

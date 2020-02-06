@@ -28,15 +28,6 @@ public @interface VMaxValue {
 	String name() default "";
 
 	/**
-	 * 字段最大值
-	 * 
-	 * @author Jovi
-	 * @date 2017年4月21日上午10:48:19
-	 * @return
-	 */
-	double val();
-
-	/**
 	 * 消息提示
 	 * 
 	 * @author Jovi
@@ -44,6 +35,15 @@ public @interface VMaxValue {
 	 * @return
 	 */
 	String value() default "";
+
+	/**
+	 * 字段最大值
+	 *
+	 * @author Jovi
+	 * @date 2017年4月21日上午10:48:19
+	 * @return
+	 */
+	double val();
 	
 	/**
 	 * 分组校验

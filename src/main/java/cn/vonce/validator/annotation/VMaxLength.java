@@ -28,15 +28,6 @@ public @interface VMaxLength {
 	String name() default "";
 
 	/**
-	 * 校验字段最大长度值
-	 * 
-	 * @author Jovi
-	 * @date 2017年4月21日上午10:49:09
-	 * @return
-	 */
-	int val();
-
-	/**
 	 * 是否只有不为空的时候才校验
 	 * @return
 	 */
@@ -50,6 +41,15 @@ public @interface VMaxLength {
 	 * @return
 	 */
 	String value() default "";
+
+	/**
+	 * 校验字段最大长度值
+	 *
+	 * @author Jovi
+	 * @date 2017年4月21日上午10:49:09
+	 * @return
+	 */
+	int val();
 	
 	/**
 	 * 分组校验

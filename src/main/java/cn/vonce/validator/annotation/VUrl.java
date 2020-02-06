@@ -44,15 +44,6 @@ public @interface VUrl {
     String value() default "";
 
     /**
-     * 校验URl格式是否正确
-     *
-     * @return
-     * @author Jovi
-     * @date 2017年4月21日上午10:49:41
-     */
-    boolean val() default true;
-
-    /**
      * 分组校验
      *
      * @return
