@@ -224,9 +224,6 @@ public class ValidatorHelper {
             case "Date":
                 whatType = WhatType.DATE_TYPE;
                 break;
-            default:
-                whatType = WhatType.OBJECT_TYPE;
-                break;
         }
         return whatType;
     }

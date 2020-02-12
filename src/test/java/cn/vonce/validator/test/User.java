@@ -10,7 +10,7 @@ import cn.vonce.validator.annotation.*;
  */
 public class User {
 
-    @VMinValue(val = 1, value = "id最小从1开始",group = {"user.add","user.update"})
+    @VMinValue(val = 1, value = "id最小从1开始", group = {"user.add", "user.update"})
     private Integer id;
 
     @VNotEmpty("名字不能为空")
@@ -20,20 +20,22 @@ public class User {
     @VNotEmpty("身份证不能为空")
     private String idCard;
 
+    @VConsist(val = {"99", "18", "22"})
     @VRangeValue(min = 1, max = 120, value = "年龄范围为1-120")
     private Integer age;
 
-    @VBoolean(val = VBoolean.BoolValue.FALSE)
+    //    @VBoolean(val = VBoolean.BoolValue.FALSE)
+    @VConsist(val = {"false2"})
     private boolean vip;
 
-    @VBoolean(val = VBoolean.BoolValue.NORMAL, value = "vip2必须为true")
+    @VBoolean(val = VBoolean.BoolValue.NORMAL, value = "vip2必须为boolean类型")
     private String vip2;
 
     @VEmail
     private String email;
 
-//    @VEqualTo(field = "email")
-    @VEqualTo(val = "imjovi@qq.com")
+    //    @VEqualTo(val = "imjovi@qq.com")
+    @VConsist(val = {"imjovi@qq.com", "766255988@qq.com"})
     private String email2;
 
     @VNumber(val = VNumber.NumType.INTEGER)

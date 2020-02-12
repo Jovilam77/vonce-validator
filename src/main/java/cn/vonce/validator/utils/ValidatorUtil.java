@@ -24,11 +24,12 @@ public class ValidatorUtil {
         if (onlyWhenNotEmpty) {
             if (StringUtil.isNotEmpty(fieldValue)) {
                 return true;
+            } else {
+                return false;
             }
         } else {
             return true;
         }
-        return false;
     }
 
     /**
@@ -58,8 +59,6 @@ public class ValidatorUtil {
                 return "数值";
             case DATE_TYPE:
                 return "日期";
-            case OBJECT_TYPE:
-                return "对象";
         }
         return null;
     }

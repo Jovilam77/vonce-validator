@@ -19,7 +19,7 @@ public class ValidateEqualTo extends AbstractValidate<VEqualTo> {
 
     @Override
     public WhatType[] type() {
-        return new WhatType[]{WhatType.STRING_TYPE};
+        return new WhatType[]{WhatType.VALUE_TYPE, WhatType.STRING_TYPE, WhatType.BOOL_TYPE};
     }
 
     @Override

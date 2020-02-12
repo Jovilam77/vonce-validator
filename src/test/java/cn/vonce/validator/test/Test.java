@@ -21,11 +21,11 @@ public class Test {
         user.setId(18);
         user.setName("Jovi123");
         user.setIdCard("12300");
-        user.setAge(120);
-        user.setVip(false);
+        user.setAge(18);
+        user.setVip(true);
         user.setVip2("123");
         user.setEmail("imjovi@qq.com");
-        user.setEmail2("imjovi@qq.com");
+        user.setEmail2("766255988@qq.com");
         user.setPhone("14168000000");
 
         BeanResult beanResult = ValidatorHelper.validBean(user, "", false);
