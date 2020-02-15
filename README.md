@@ -157,23 +157,23 @@ public class ValidateEqual1 extends AbstractValidate<VEqual1> {
 ```java
 @Validate     //统一校验注解规范
 ```
-参数  | 解释  | 默认 |必须
+参数  | 解释  | 默认 | 必须
  :----: | :-----: | :-----: | :------:  
  type  | 指定规则实现类 |  | 是
   
 ```java
 @VBean        //校验bean
 ```
-参数  | 解释  | 默认 |必须
+参数  | 解释  | 默认 | 必须
  :----: | :-----: | :-----: | :------: 
  group  | 分组检验 | "" |否
  interrupt  | 遇到错误是否继续校验 | true |否
 
 ```java
-@VBoolean     //校验布尔类型
+@VBoolean     //校验布尔类型，支持字符、布尔类型校验
 ```
 
-参数  | 解释  | 默认 |必须
+参数  | 解释  | 默认 | 必须
  :----: | :-----: | :-----: | :------: 
  name  | 字段名 | "" | 否
  value  | 消息提示 | "" |否
@@ -181,10 +181,10 @@ public class ValidateEqual1 extends AbstractValidate<VEqual1> {
  group | 分组检验 | "" |否
 
 ```java
-@VChinese     //校验中文
+@VChinese     //校验中文，支持字符类型校验
 ```
 
-参数  | 解释  | 默认 |必须
+参数  | 解释  | 默认 | 必须
  :----: | :-----: | :-----: | :------: 
  name  | 字段名 | "" | 否
  onlyWhenNotEmpty  | 不为空的时候才校验 | false | 否
@@ -193,10 +193,22 @@ public class ValidateEqual1 extends AbstractValidate<VEqual1> {
  group | 分组检验 | "" |否
 
 ```java
-@VEmail       //校验邮箱格式
+@VConsist     //校验是否由指定值构成，支持字符、数值、布尔类型校验
 ```
 
-参数  | 解释  | 默认 |必须
+参数  | 解释  | 默认 | 必须
+ :----: | :-----: | :-----: | :------: 
+ name  | 字段名 | "" | 否
+ onlyWhenNotEmpty  | 不为空的时候才校验 | false | 否
+ value  | 消息提示 | "" |否
+ val  | 指定值 |  |是
+ group | 分组检验 | "" |否
+
+```java
+@VEmail       //校验邮箱格式，支持字符类型校验
+```
+
+参数  | 解释  | 默认 | 必须
  :----: | :-----: | :-----: | :------: 
  name  | 字段名 | "" | 否
  onlyWhenNotEmpty  | 不为空的时候才校验 | false | 否
@@ -205,10 +217,10 @@ public class ValidateEqual1 extends AbstractValidate<VEqual1> {
 
 
 ```java
-@VEqualTo     //校验该字段值是否与指定的值一致
+@VEqualTo     //校验该字段值是否与指定的值一致，支持字符、数值、布尔类型校验
 ```
 
-参数  | 解释  | 默认 |必须
+参数  | 解释  | 默认 | 必须
  :----: | :-----: | :-----: | :------: 
  name  | 字段名 | "" | 否
  value  | 消息提示 | "" |否
@@ -218,10 +230,10 @@ public class ValidateEqual1 extends AbstractValidate<VEqual1> {
 
 
 ```java
-@VIDCard      //校验身份证号码格式
+@VIDCard      //校验身份证号码格式，支持字符类型校验
 ```
 
-参数  | 解释  | 默认 |必须
+参数  | 解释  | 默认 | 必须
  :----: | :-----: | :-----: | :------: 
  name  | 字段名 | "" | 否
  onlyWhenNotEmpty  | 不为空的时候才校验 | false | 否
@@ -229,10 +241,10 @@ public class ValidateEqual1 extends AbstractValidate<VEqual1> {
  group | 分组检验 | "" |否
 
 ```java
-@VIPAddress   //校验IP地址格式
+@VIPAddress   //校验IP地址格式，支持字符类型校验
 ```
 
-参数  | 解释  | 默认 |必须
+参数  | 解释  | 默认 | 必须
  :----: | :-----: | :-----: | :------: 
  name  | 字段名 | "" | 否
  onlyWhenNotEmpty  | 不为空的时候才校验 | false | 否
@@ -240,10 +252,10 @@ public class ValidateEqual1 extends AbstractValidate<VEqual1> {
  group | 分组检验 | "" |否
 
 ```java
-@VMaxLength   //校验设置的最大长度
+@VMaxLength   //校验设置的最大长度，支持字符类型校验
 ```
 
-参数  | 解释  | 默认 |必须
+参数  | 解释  | 默认 | 必须
  :----: | :-----: | :-----: | :------: 
  name  | 字段名 | "" | 否
  onlyWhenNotEmpty  | 不为空的时候才校验 | false | 否
@@ -252,10 +264,10 @@ public class ValidateEqual1 extends AbstractValidate<VEqual1> {
  group | 分组检验 | "" |否
 
 ```java
-@VMaxValue    //校验设置的最大值
+@VMaxValue    //校验设置的最大值，支持字符、数值类型校验
 ```
 
-参数  | 解释  | 默认 |必须
+参数  | 解释  | 默认 | 必须
  :----: | :-----: | :-----: | :------: 
  name  | 字段名 | "" | 否
  value  | 消息提示 | "" |否
@@ -263,10 +275,10 @@ public class ValidateEqual1 extends AbstractValidate<VEqual1> {
  group | 分组检验 | "" |否
 
 ```java
-@VMinLength   //校验设置的最小长度
+@VMinLength   //校验设置的最小长度，支持字符类型校验
 ```
 
-参数  | 解释  | 默认 |必须
+参数  | 解释  | 默认 | 必须
  :----: | :-----: | :-----: | :------: 
  name  | 字段名 | "" | 否
  onlyWhenNotEmpty  | 不为空的时候才校验 | false | 否
@@ -275,10 +287,10 @@ public class ValidateEqual1 extends AbstractValidate<VEqual1> {
  group | 分组检验 | "" |否
 
 ```java
-@VMinValue    //校验设置的最小值
+@VMinValue    //校验设置的最小值，支持字符、数值类型校验
 ```
 
-参数  | 解释  | 默认 |必须
+参数  | 解释  | 默认 | 必须
  :----: | :-----: | :-----: | :------: 
  name  | 字段名 | "" | 否
  value  | 消息提示 | "" |否
@@ -286,30 +298,30 @@ public class ValidateEqual1 extends AbstractValidate<VEqual1> {
  group | 分组检验 | "" |否
 
 ```java
-@VNotEmpty    //校验不能为empty(null和空字符串)
+@VNotEmpty    //校验不能为empty，支持所有类型校验
 ```
 
-参数  | 解释  | 默认 |必须
+参数  | 解释  | 默认 | 必须
  :----: | :-----: | :-----: | :------: 
  name  | 字段名 | "" | 否
  value  | 消息提示 | "" |否
  group | 分组检验 | "" |否
 
 ```java
-@VNotNull     //校验不能为null
+@VNotNull     //校验不能为null，支持所有类型校验
 ```
 
-参数  | 解释  | 默认 |必须
+参数  | 解释  | 默认 | 必须
  :----: | :-----: | :-----: | :------: 
  name  | 字段名 | "" | 否
  value  | 消息提示 | "" |否
  group | 分组检验 | "" |否
 
 ```java
-@VNumber      //校验数字
+@VNumber      //校验数字，支持字符类型校验
 ```
 
-参数  | 解释  | 默认 |必须
+参数  | 解释  | 默认 | 必须
  :----: | :-----: | :-----: | :------: 
  name  | 字段名 | "" | 否
  value  | 消息提示 | "" |否
@@ -317,10 +329,10 @@ public class ValidateEqual1 extends AbstractValidate<VEqual1> {
  group | 分组检验 | "" |否
 
 ```java
-@VPassword    //校验密码格式
+@VPassword    //校验密码格式，支持字符类型校验
 ```
 
-参数  | 解释  | 默认 |必须
+参数  | 解释  | 默认 | 必须
  :----: | :-----: | :-----: | :------: 
  name  | 字段名 | "" | 否
  onlyWhenNotEmpty  | 不为空的时候才校验 | false | 否
@@ -328,10 +340,10 @@ public class ValidateEqual1 extends AbstractValidate<VEqual1> {
  group | 分组检验 | "" |否
 
 ```java
-@VPhone       //校验手机或电话格式
+@VPhone       //校验手机或电话格式，支持字符类型校验
 ```
 
-参数  | 解释  | 默认 |必须
+参数  | 解释  | 默认 | 必须
  :----: | :-----: | :-----: | :------: 
  name  | 字段名 | "" | 否
  onlyWhenNotEmpty  | 不为空的时候才校验 | false | 否
@@ -340,10 +352,10 @@ public class ValidateEqual1 extends AbstractValidate<VEqual1> {
  group | 分组检验 | "" |否
 
 ```java
-@VRangeLength //校验长度范围
+@VRangeLength //校验长度范围，支持字符类型校验
 ```
 
-参数  | 解释  | 默认 |必须
+参数  | 解释  | 默认 | 必须
  :----: | :-----: | :-----: | :------: 
  name  | 字段名 | "" | 否
  onlyWhenNotEmpty  | 不为空的时候才校验 | false | 否
@@ -353,10 +365,10 @@ public class ValidateEqual1 extends AbstractValidate<VEqual1> {
  group | 分组检验 | "" |否
 
 ```java
-@VRangeValue  //校验值范围
+@VRangeValue  //校验值范围，支持字符、数值类型校验
 ```
 
-参数  | 解释  | 默认 |必须
+参数  | 解释  | 默认 | 必须
  :----: | :-----: | :-----: | :------: 
  name  | 字段名 | "" | 否
  onlyWhenNotEmpty  | 不为空的时候才校验 | false | 否
@@ -366,10 +378,10 @@ public class ValidateEqual1 extends AbstractValidate<VEqual1> {
  group | 分组检验 | "" |否
 
 ```java
-@VRegex       //校验是否符合正则表达式的规则
+@VRegex       //校验是否符合正则表达式的规则，支持字符类型校验
 ```
 
-参数  | 解释  | 默认 |必须
+参数  | 解释  | 默认 | 必须
  :----: | :-----: | :-----: | :------: 
  name  | 字段名 | "" | 否
  value  | 消息提示 | "" |否
@@ -377,10 +389,10 @@ public class ValidateEqual1 extends AbstractValidate<VEqual1> {
  group | 分组检验 | "" |否
 
 ```java
-@VSQLInject   //校验是否存在sql注入
+@VSQLInject   //校验是否存在sql注入，支持字符类型校验
 ```
 
-参数  | 解释  | 默认 |必须
+参数  | 解释  | 默认 | 必须
  :----: | :-----: | :-----: | :------: 
  name  | 字段名 | "" | 否
  onlyWhenNotEmpty  | 不为空的时候才校验 | false | 否
@@ -388,10 +400,10 @@ public class ValidateEqual1 extends AbstractValidate<VEqual1> {
  group | 分组检验 | "" |否
 
 ```java
-@VUrl         //校验URl格式
+@VUrl         //校验URl格式，支持字符类型校验
 ```
 
-参数  | 解释  | 默认 |必须
+参数  | 解释  | 默认 | 必须
  :----: | :-----: | :-----: | :------: 
  name  | 字段名 | "" | 否
  onlyWhenNotEmpty  | 不为空的时候才校验 | false | 否
@@ -399,10 +411,10 @@ public class ValidateEqual1 extends AbstractValidate<VEqual1> {
  group | 分组检验 | "" |否
 
 ```java
-@VUserName    //校验用户名格式
+@VUserName    //校验用户名格式，支持字符类型校验
 ```
 
-参数  | 解释  | 默认 |必须
+参数  | 解释  | 默认 | 必须
  :----: | :-----: | :-----: | :------: 
  name  | 字段名 | "" | 否
  onlyWhenNotEmpty  | 不为空的时候才校验 | false | 否

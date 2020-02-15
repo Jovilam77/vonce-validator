@@ -1,8 +1,6 @@
 package cn.vonce.validator.annotation;
 
-import cn.vonce.validator.rule.impl.ValidateBoolean;
 import cn.vonce.validator.rule.impl.ValidateConsist;
-
 import java.lang.annotation.*;
 
 /**
@@ -41,7 +39,7 @@ public @interface VConsist {
     String value() default "";
 
     /**
-     * 包含以下值
+     * 指定值
      *
      * @return
      */
