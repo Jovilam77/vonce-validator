@@ -9,7 +9,7 @@
     <dependency>
     	<groupId>cn.vonce</groupId>
     	<artifactId>vonce-validator</artifactId>
-    	<version>0.9.1</version>
+    	<version>0.9.2</version>
     </dependency>
 ###### 2：如何配置
 ```java
