@@ -41,7 +41,7 @@ public class ValidatorInterceptor implements MethodInterceptor {
         } else {
             baseController = new BaseController();
         }
-        BeanResult beanResult = new BeanResult(true,"校验通过");
+        BeanResult beanResult = new BeanResult(true, "校验通过");
         for (int i = 0; i < arg0.getArguments().length; i++) {
             // 获取实际对象-即为原始对象(可能是Bean，也可能是字段)
             Object object = arg0.getArguments()[i];
@@ -62,7 +62,7 @@ public class ValidatorInterceptor implements MethodInterceptor {
             // 校验有注解的字段
             List<FieldResult> validFieldResultList = ValidatorHelper.valid(annotations, arg0.getMethod().getName() + "方法参数" + (i + 1), object, null, "", true);
             if (!validFieldResultList.isEmpty()) {
-                beanResult = new BeanResult(validFieldResultList.get(0).getTips(), validFieldResultList);
+                beanResult = new BeanResult("校验存在" + validFieldResultList.size() + "条错误", validFieldResultList);
                 break;
             }
 
@@ -74,15 +74,15 @@ public class ValidatorInterceptor implements MethodInterceptor {
             logger.info("请求URL参数：该方法缺少HttpServletRequest参数无法读取请求URL参数 ");
         }
         if (!beanResult.isPass()) {
-            logger.warn("参数校验不通过：" + fullName);
-            logger.warn("响应内容：" + beanResult.getMessage());
+            String tips = beanResult.getFieldResultList().get(0).getTips();
+            logger.error(beanResult.getMessage() + "，详情请看：" + beanResult.getFieldResultList());
+            logger.info("参数校验不通过：" + fullName);
+            logger.info("响应内容：" + tips);
             // 如果该注解存在
             if (!arg0.getMethod().getReturnType().getName().equals("void") && (responseBody != null || restController != null)) {
-                return baseController.parameterHint(beanResult.getMessage());
+                return baseController.parameterHint(tips);
             } else if (baseController.getRequest() != null && baseController.getResponse() != null) {
-                baseController.parameterHintJSONP(beanResult.getMessage());
-            } else {
-                logger.error("参数错误：" + beanResult.getMessage());
+                baseController.parameterHintJSONP(tips);
             }
             return null;
         }

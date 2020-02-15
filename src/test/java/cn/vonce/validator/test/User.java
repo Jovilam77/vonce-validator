@@ -2,6 +2,9 @@ package cn.vonce.validator.test;
 
 import cn.vonce.validator.annotation.*;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 /**
  * @author Jovi
  * @version 1.0
@@ -43,6 +46,12 @@ public class User {
     @VPhone
     private String phone;
 
+    @VNotNull
+    private BigDecimal cashPledge;
+
+    @VNotEmpty
+    private Date createTime;
+
     public Integer getId() {
         return id;
     }
@@ -75,7 +84,7 @@ public class User {
         this.age = age;
     }
 
-    public boolean getVip() {
+    public boolean isVip() {
         return vip;
     }
 
@@ -113,5 +122,21 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public BigDecimal getCashPledge() {
+        return cashPledge;
+    }
+
+    public void setCashPledge(BigDecimal cashPledge) {
+        this.cashPledge = cashPledge;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

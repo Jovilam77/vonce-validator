@@ -65,7 +65,7 @@ public class ValidatorHelper {
             }
         }
         if (!fieldResultList.isEmpty()) {
-            return new BeanResult(fieldResultList.get(0).getTips(), fieldResultList);
+            return new BeanResult("校验存在" + fieldResultList.size() + "条错误", fieldResultList);
         }
         return new BeanResult(true, "校验通过");
     }
@@ -144,27 +144,27 @@ public class ValidatorHelper {
             }
         } catch (SecurityException e) {
             logger.error(e.getMessage(), e);
-            fieldResultList.add(new FieldResult(fieldInfo.getName(), "出现异常", "SecurityException：" + e.getMessage()));
+            fieldResultList.add(new FieldResult("'" + fieldInfo.getName() + "'", "出现异常", "SecurityException：" + e.getMessage()));
             return fieldResultList;
         } catch (IllegalAccessException e) {
             logger.error(e.getMessage(), e);
-            fieldResultList.add(new FieldResult(fieldInfo.getName(), "出现异常", "IllegalAccessException：" + e.getMessage()));
+            fieldResultList.add(new FieldResult("'" + fieldInfo.getName() + "'", "出现异常", "IllegalAccessException：" + e.getMessage()));
             return fieldResultList;
         } catch (IllegalArgumentException e) {
             logger.error(e.getMessage(), e);
-            fieldResultList.add(new FieldResult(fieldInfo.getName(), "出现异常", "IllegalArgumentException：" + e.getMessage()));
+            fieldResultList.add(new FieldResult("'" + fieldInfo.getName() + "'", "出现异常", "IllegalArgumentException：" + e.getMessage()));
             return fieldResultList;
         } catch (InvocationTargetException e) {
             logger.error(e.getMessage(), e);
-            fieldResultList.add(new FieldResult(fieldInfo.getName(), "出现异常", "InvocationTargetException：" + e.getMessage()));
+            fieldResultList.add(new FieldResult("'" + fieldInfo.getName() + "'", "出现异常", "InvocationTargetException：" + e.getMessage()));
             return fieldResultList;
         } catch (NoSuchMethodException e) {
             logger.error(e.getMessage(), e);
-            fieldResultList.add(new FieldResult(fieldInfo.getName(), "出现异常", "NoSuchMethodException：" + e.getMessage()));
+            fieldResultList.add(new FieldResult("'" + fieldInfo.getName() + "'", "出现异常", "NoSuchMethodException：" + e.getMessage()));
             return fieldResultList;
         } catch (InstantiationException e) {
             logger.error(e.getMessage(), e);
-            fieldResultList.add(new FieldResult(fieldInfo.getName(), "出现异常", "InstantiationException：" + e.getMessage()));
+            fieldResultList.add(new FieldResult("'" + fieldInfo.getName() + "'", "出现异常", "InstantiationException：" + e.getMessage()));
             return fieldResultList;
         }
         return fieldResultList;
@@ -224,6 +224,8 @@ public class ValidatorHelper {
             case "Date":
                 whatType = WhatType.DATE_TYPE;
                 break;
+            default:
+                whatType = WhatType.OTHER_TYPE;
         }
         return whatType;
     }

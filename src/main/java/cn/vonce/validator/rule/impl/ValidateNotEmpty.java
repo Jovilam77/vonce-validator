@@ -17,7 +17,7 @@ public class ValidateNotEmpty extends AbstractValidate<VNotEmpty> {
 
     @Override
     public WhatType[] type() {
-        return new WhatType[]{WhatType.STRING_TYPE};
+        return new WhatType[]{WhatType.STRING_TYPE, WhatType.VALUE_TYPE, WhatType.BOOL_TYPE, WhatType.DATE_TYPE, WhatType.OTHER_TYPE};
     }
 
     @Override

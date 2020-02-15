@@ -11,6 +11,6 @@ package cn.vonce.validator.helper;
  */
 public enum WhatType {
 
-    STRING_TYPE, VALUE_TYPE, BOOL_TYPE, DATE_TYPE
+    STRING_TYPE, VALUE_TYPE, BOOL_TYPE, DATE_TYPE, OTHER_TYPE
 
 }

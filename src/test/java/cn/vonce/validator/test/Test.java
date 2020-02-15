@@ -4,6 +4,9 @@ import cn.vonce.validator.helper.ValidatorHelper;
 import cn.vonce.validator.model.BeanResult;
 import cn.vonce.validator.model.FieldResult;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 /**
  * @author Jovi
  * @version 1.0
@@ -27,6 +30,8 @@ public class Test {
         user.setEmail("imjovi@qq.com");
         user.setEmail2("766255988@qq.com");
         user.setPhone("14168000000");
+        user.setCashPledge(new BigDecimal("10"));
+        user.setCreateTime(new Date());
 
         BeanResult beanResult = ValidatorHelper.validBean(user, "", false);
         if (!beanResult.isPass()) {

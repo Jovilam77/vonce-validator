@@ -17,7 +17,7 @@ public class ValidateNotNull extends AbstractValidate<VNotNull> {
 
     @Override
     public WhatType[] type() {
-        return null;
+        return new WhatType[]{WhatType.STRING_TYPE, WhatType.VALUE_TYPE, WhatType.BOOL_TYPE, WhatType.DATE_TYPE, WhatType.OTHER_TYPE};
     }
 
     @Override
@@ -27,6 +27,9 @@ public class ValidateNotNull extends AbstractValidate<VNotNull> {
 
     @Override
     public boolean check(VNotNull valid, FieldInfo fieldInfo) {
+        if (fieldInfo.getValue() != null) {
+            return true;
+        }
         return false;
     }
 

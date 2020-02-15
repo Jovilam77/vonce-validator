@@ -52,13 +52,15 @@ public class ValidatorUtil {
     public static String getTypeName(WhatType type) {
         switch (type) {
             case STRING_TYPE:
-                return "字符串";
+                return "字符";
             case BOOL_TYPE:
                 return "布尔";
             case VALUE_TYPE:
                 return "数值";
             case DATE_TYPE:
                 return "日期";
+            case OTHER_TYPE:
+                return "非字符、布尔、数值、日期";
         }
         return null;
     }
