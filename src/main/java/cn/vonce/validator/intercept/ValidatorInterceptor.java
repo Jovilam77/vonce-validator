@@ -12,6 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.context.request.ServletWebRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,6 +43,10 @@ public class ValidatorInterceptor implements MethodInterceptor {
             baseController = (BaseController) arg0.getThis();
         } else {
             baseController = new BaseController();
+            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+            HttpServletResponse response = ((ServletWebRequest) RequestContextHolder.getRequestAttributes()).getResponse();
+            baseController.setRequest(request);
+            baseController.setResponse(response);
         }
         BeanResult beanResult = new BeanResult(true, "校验通过");
         for (int i = 0; i < arg0.getArguments().length; i++) {
@@ -47,12 +54,6 @@ public class ValidatorInterceptor implements MethodInterceptor {
             Object object = arg0.getArguments()[i];
             // 获取参数对象-用于后面获取该参数的注解
             Annotation[] annotations = arg0.getMethod().getParameterAnnotations()[i];
-            if (baseController.getRequest() == null && object instanceof HttpServletRequest) {
-                baseController.setRequest((HttpServletRequest) object);
-            }
-            if (baseController.getResponse() == null && object instanceof HttpServletResponse) {
-                baseController.setResponse((HttpServletResponse) object);
-            }
             // 优先校验bean
             VBean validBean = ValidatorHelper.getAnnotation(annotations, VBean.class);
             if (validBean != null) {
@@ -70,15 +71,13 @@ public class ValidatorInterceptor implements MethodInterceptor {
         logger.info("正在校验参数：" + fullName);
         if (baseController.getRequest() != null) {
             logger.info("请求URL参数：" + RequestDataUtil.getParameters(baseController.getRequest().getParameterMap()));
-        } else {
-            logger.info("请求URL参数：该方法缺少HttpServletRequest参数无法读取请求URL参数 ");
         }
         if (!beanResult.isPass()) {
             String tips = beanResult.getFieldResultList().get(0).getTips();
             logger.error(beanResult.getMessage() + "，详情请看：" + beanResult.getFieldResultList());
             logger.info("参数校验不通过：" + fullName);
             logger.info("响应内容：" + tips);
-            // 如果该注解存在
+            // 如果该方法是标注未@ResponseBody或者该类标识为@RestController
             if (!arg0.getMethod().getReturnType().getName().equals("void") && (responseBody != null || restController != null)) {
                 return baseController.parameterHint(tips);
             } else if (baseController.getRequest() != null && baseController.getResponse() != null) {
