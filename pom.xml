@@ -124,7 +124,7 @@
         <servlet-api.version>4.0.0</servlet-api.version>
         <spring.version>4.1.2.RELEASE</spring.version>
         <commons.lang.version>2.6</commons.lang.version>
-        <vonce.common.version>1.0.4</vonce.common.version>
+        <vonce.common.version>1.0.7</vonce.common.version>
     </properties>
 
     <dependencies>
