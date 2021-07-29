@@ -1,6 +1,7 @@
 package cn.vonce.validator.intercept;
 
 import cn.vonce.common.base.BaseController;
+import cn.vonce.common.bean.RS;
 import cn.vonce.common.utils.RequestDataUtil;
 import cn.vonce.validator.annotation.VBean;
 import cn.vonce.validator.helper.ValidatorHelper;
@@ -14,8 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.context.request.ServletWebRequest;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.annotation.Annotation;
@@ -44,7 +43,6 @@ public class ValidatorInterceptor implements MethodInterceptor {
         } else {
             baseController = new BaseController();
             baseController.setRequest(((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest());
-            //baseController.setResponse(((ServletWebRequest) RequestContextHolder.getRequestAttributes()).getResponse());
         }
         BeanResult beanResult = new BeanResult(true, "校验通过");
         for (int i = 0; i < arg0.getArguments().length; i++) {
