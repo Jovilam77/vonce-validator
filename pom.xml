@@ -115,7 +115,7 @@
 
     <artifactId>vonce-validator</artifactId>
     <groupId>cn.vonce</groupId>
-    <version>0.9.2</version>
+    <version>0.9.3</version>
 
     <!-- 版本信息 -->
     <properties>
