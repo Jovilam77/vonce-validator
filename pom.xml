@@ -115,7 +115,7 @@
 
     <artifactId>vonce-validator</artifactId>
     <groupId>cn.vonce</groupId>
-    <version>0.9.3</version>
+    <version>0.9.4</version>
 
     <!-- 版本信息 -->
     <properties>
@@ -160,13 +160,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
             <version>${spring.version}</version>
-            <scope>compile</scope>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>${commons.lang.version}</version>
             <scope>compile</scope>
             <optional>true</optional>
         </dependency>

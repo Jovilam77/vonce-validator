@@ -4,7 +4,7 @@ import cn.vonce.validator.annotation.VNumber;
 import cn.vonce.validator.helper.WhatType;
 import cn.vonce.validator.model.FieldInfo;
 import cn.vonce.validator.rule.AbstractValidate;
-import org.apache.commons.lang.math.NumberUtils;
+import cn.vonce.validator.utils.ValidatorUtil;
 
 /**
  * 校验数字
@@ -39,17 +39,17 @@ public class ValidateNumber extends AbstractValidate<VNumber> {
         int index = fieldInfo.getValue().toString().indexOf(".");
         switch (valid.val()) {
             case NUMBER:
-                if (!NumberUtils.isNumber(fieldInfo.getValue().toString())) {
+                if (!ValidatorUtil.isNumber(fieldInfo.getValue().toString())) {
                     return false;
                 }
                 break;
             case INTEGER:
-                if (!NumberUtils.isNumber(fieldInfo.getValue().toString()) || (index > -1 && index < fieldInfo.getValue().toString().length() - 1)) {
+                if (!ValidatorUtil.isNumber(fieldInfo.getValue().toString()) || (index > -1 && index < fieldInfo.getValue().toString().length() - 1)) {
                     return false;
                 }
                 break;
             case FLOAT:
-                if (!NumberUtils.isNumber(fieldInfo.getValue().toString()) || (index == -1 || index == fieldInfo.getValue().toString().length() - 1)) {
+                if (!ValidatorUtil.isNumber(fieldInfo.getValue().toString()) || (index == -1 || index == fieldInfo.getValue().toString().length() - 1)) {
                     return false;
                 }
                 break;

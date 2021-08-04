@@ -4,7 +4,7 @@ import cn.vonce.validator.annotation.VMinValue;
 import cn.vonce.validator.helper.WhatType;
 import cn.vonce.validator.model.FieldInfo;
 import cn.vonce.validator.rule.AbstractValidate;
-import org.apache.commons.lang.math.NumberUtils;
+import cn.vonce.validator.utils.ValidatorUtil;
 
 /**
  * 校验字段设置的最小值
@@ -28,7 +28,7 @@ public class ValidateMinValue extends AbstractValidate<VMinValue> {
 
     @Override
     public boolean check(VMinValue valid, FieldInfo fieldInfo) {
-        if (!NumberUtils.isNumber(fieldInfo.getValue().toString())) {
+        if (!ValidatorUtil.isNumber(fieldInfo.getValue().toString())) {
             return false;
         }
         double value = Double.parseDouble(fieldInfo.getValue().toString());
